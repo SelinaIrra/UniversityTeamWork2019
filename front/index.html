@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html data-ng-app="Light">
+
+<head>
+	<title>Light</title>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<link rel="stylesheet" type="text/css" href="Content/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="Content/AngularJS/angular-material.min.css" />
+	<link rel="stylesheet" type="text/css" href="Content/Plugins/airDataPicker/css/datepicker.min.css" />
+    <link rel="stylesheet" href="Content/Plugins/bz-slider.css">
+	<link rel="stylesheet" type="text/css" href="Content/commonStyle.css" />
+
+	<link href="fontawesome/css/all.css" rel="stylesheet">
+	<link href="fontawesome/css/fontawesome.css" rel="stylesheet">
+	<link href="fontawesome/css/brands.css" rel="stylesheet">
+	<link href="fontawesome/css/solid.css" rel="stylesheet">
+
+	<script type="text/javascript" src="Scripts/jQuery/jquery-3.4.1.min.js"></script>
+	<script type="text/javascript" src="Scripts/jQuery/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="Scripts/AngularJS/angular.min.js"></script>
+	<script type="text/javascript" src="Scripts/AngularJS/angular-animate.min.js"></script>
+	<script type="text/javascript" src="Scripts/AngularJS/angular-route.min.js"></script>
+	<script type="text/javascript" src="Scripts/AngularJS/angular-aria.min.js"></script>
+	<script type="text/javascript" src="Scripts/AngularJS/angular-messages.min.js"></script>
+	<script type="text/javascript" src="Scripts/AngularJS/angular-material.min.js"></script>
+	<script type="text/javascript" src="Scripts/AngularJS/angular-sanitize.min.js"></script>
+	<script type="text/javascript" src="Scripts/Plugins/airDataPicker/js/datepicker.min.js"></script>
+	<script src="Scripts/Plugins/bz-slider.src.js"></script>
+
+	<script type="text/javascript" src="Content/bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="Content/bootstrap/js/ui-bootstrap-tpls-0.10.0.js"></script>
+
+	<script type="text/javascript" src="Scripts/Controllers/cartCtrl.js"></script>
+	<script type="text/javascript" src="Scripts/Controllers/lampCtrl.js"></script>
+	<script type="text/javascript" src="Scripts/Controllers/lightCtrl.js"></script>
+	<script type="text/javascript" src="Scripts/Controllers/patronCtrl.js"></script>
+	<script type="text/javascript" src="Scripts/Controllers/torsherCtrl.js"></script>
+	<script type="text/javascript" src="Scripts/Controllers/soffitCtrl.js"></script>
+	<script type="text/javascript" src="Scripts/Controllers/braCtrl.js"></script>
+	<script type="text/javascript" src="Scripts/Controllers/IndexController.js"></script>
+	<script type="text/javascript" src="Scripts/Light.js"></script>
+	<script defer src="fontawesome/js/all.js"></script>
+	<script defer src="fontawesome/js/brands.js"></script>
+	<script defer src="fontawesome/js/solid.js"></script>
+	<script defer src="fontawesome/js/fontawesome.js"></script>
+</head>
+
+<body data-ng-controller="IndexController as c">
+	<div class="main">
+		<header>
+			<div class="header">
+				<div class="search">
+					<input placeholder="Поиск">
+					<span class="search_icon"><i class="fas fa-search"></i></span>
+				</div>
+				<a href="#!"><img src="Content/img/logo.png"></a>
+				<div class="block">
+					<button class="button_mini">Вход/Регистрация</button>
+					<span><i class="fas fa-shopping-cart"></i></span>
+				</div>
+			</div>
+			<div class="headerMenu_view">
+				<ul>
+					<li id="patronsBlock">
+						<a href="#!patron"><p>Патроны</p></a>
+					</li>
+					<li id="lampsBlock">
+						<a href="#!lamp"><p>Лампочки Эдисона</p></a>
+					</li>
+					<li id="soffitBlock">
+						<a href="#!soffit"><p>Подвесной свет</p></a>
+					</li>
+					<li id="floorBlock">
+						<a href="#!torsher"><p>Торшеры</p></a>
+					</li>
+					<li id="tableBlock">
+						<a href="#!bra"><p>Настольный свет</p></a>
+					</li>
+					<li id="sconceBlock">
+						<a href="#!bra"><p>Бра</p></a>
+					</li>
+				</ul>
+				<p>Информация</p>
+			</div>
+		</header>
+		<div bz-slider delay="delay" autoplay="true" class="slider no_display" id="mainContent">
+			<div class="bz-slide" ng-repeat="(i, slide) in c.slides" ng-show="i == $slideIndex" ng-class="slide.class">
+				<img ng-src="{{ slide.image }}" />
+			</div>
+		</div>
+		<div ng-view> </div>
+	</div>
+</body>
+
+</html>
