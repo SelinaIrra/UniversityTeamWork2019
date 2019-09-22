@@ -1,5 +1,11 @@
 var Light = angular.module('Light', ['ngSanitize', 'ngMaterial', 'ngMessages', 'ui.bootstrap', 'ngAnimate', 'ngRoute', 'bzSlider']);
 
+Light.factory('UtilsService', UtilsService);
+
+Light.directive('dropdownList', DropdownList);
+Light.directive('multipleSelectium', MultipleSelectium);
+Light.directive('modal', modal);
+
 Light.controller('IndexController', IndexController);
 Light.controller('patronCtrl', patronCtrl);
 Light.controller('cartCtrl', cartCtrl);
@@ -39,9 +45,17 @@ Light.config( ['$routeProvider', function($routeProvider) {
       templateUrl: 'cart.html',
       controller: 'cartCtrl'
     })
+    .when('/info', {
+      templateUrl: 'info.html',
+      controller: 'infoCtrl'
+    })
     .otherwise({
       redirectTo: '/'
     });
+}]);
+
+Light.config(['$qProvider', function ($qProvider) {
+  $qProvider.errorOnUnhandledRejections(false);
 }]);
 
 Light.run (function($rootScope){

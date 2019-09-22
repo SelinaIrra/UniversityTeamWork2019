@@ -1,0 +1,22 @@
+<div>
+    <dropdown-list headline="" multiple="true" placeholder="{{multiSelectDirective.placeholder}}" id="{{multiSelectDirective.id}}" close="false" class="multiSelect__view">
+        <div class="multiSelectium__filter_wrap" ng-show="multiSelectDirective.filtering">
+            <input type="text" class="input_mini" ng-model="filterModel" id="{{multiSelectDirective.id}}_filter">
+            <span ng-click="filterModel=undefined"><i class="fas fa-times"></i></span>
+        </div>
+        <li>
+            <label class="checkbox">
+                <input class="checkbox_input" type="checkbox" id="checkAll_{{$index}}" type="checkbox" ng-click="toggleCheckAllSelectOption($event)" ng-checked="selectedOptionsArray.length == options.length">
+                <div class="checkbox_icon"></div>
+                <span class="checkbox_text">Выбрать все</span>
+            </label>
+        </li>
+        <li ng-repeat="option in options|filter:filterModel" class="multiSelectium__paddding_left">
+            <label class="checkbox">
+                <input class="checkbox_input" type="checkbox" ng-click="toggleCheckSelectedOption(option)" ng-checked="checkValues[option].check">
+                <div class="checkbox_icon"></div>
+                <span class="checkbox_text">{{option}}</span>
+            </label>
+        </li>
+    </dropdown-list>
+</div>

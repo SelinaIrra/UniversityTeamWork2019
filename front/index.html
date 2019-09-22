@@ -8,8 +8,12 @@
 	<link rel="stylesheet" type="text/css" href="Content/bootstrap/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="Content/AngularJS/angular-material.min.css" />
 	<link rel="stylesheet" type="text/css" href="Content/Plugins/airDataPicker/css/datepicker.min.css" />
-    <link rel="stylesheet" href="Content/Plugins/bz-slider.css">
+    <link rel="stylesheet" type="text/css" href="Content/Plugins/bz-slider.css">
 	<link rel="stylesheet" type="text/css" href="Content/commonStyle.css" />
+
+	<link rel="stylesheet" type="text/css" href="Scripts/Directives/dropdownList/dropdownList.css"></link>
+	<link rel="stylesheet" type="text/css" href="Scripts/Directives/multipleSelectium/multipleSelectium.css"></link>
+	<link rel="stylesheet" type="text/css" href="Scripts/Directives/modal/modal.css"></link>
 
 	<link href="fontawesome/css/all.css" rel="stylesheet">
 	<link href="fontawesome/css/fontawesome.css" rel="stylesheet">
@@ -31,6 +35,12 @@
 	<script type="text/javascript" src="Content/bootstrap/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="Content/bootstrap/js/ui-bootstrap-tpls-0.10.0.js"></script>
 
+	<script type="text/javascript" src="Scripts/Service/UtilsService.js"></script>
+
+	<script type="text/javascript" src="Scripts/Directives/dropdownList/dropdownList.js"></script>
+	<script type="text/javascript" src="Scripts/Directives/multipleSelectium/multipleSelectium.js"></script>
+	<script type="text/javascript" src="Scripts/Directives/modal/modal.js"></script>
+
 	<script type="text/javascript" src="Scripts/Controllers/cartCtrl.js"></script>
 	<script type="text/javascript" src="Scripts/Controllers/lampCtrl.js"></script>
 	<script type="text/javascript" src="Scripts/Controllers/lightCtrl.js"></script>
@@ -38,6 +48,7 @@
 	<script type="text/javascript" src="Scripts/Controllers/torsherCtrl.js"></script>
 	<script type="text/javascript" src="Scripts/Controllers/soffitCtrl.js"></script>
 	<script type="text/javascript" src="Scripts/Controllers/braCtrl.js"></script>
+	<script type="text/javascript" src="Scripts/Controllers/infoCtrl.js"></script>
 	<script type="text/javascript" src="Scripts/Controllers/IndexController.js"></script>
 	<script type="text/javascript" src="Scripts/Light.js"></script>
 	<script defer src="fontawesome/js/all.js"></script>
@@ -54,10 +65,10 @@
 					<input placeholder="Поиск">
 					<span class="search_icon"><i class="fas fa-search"></i></span>
 				</div>
-				<a href="#!"><img src="Content/img/logo.png"></a>
+				<a href="/index.html"><img src="Content/img/logo.png"></a>
 				<div class="block">
 					<button class="button_mini">Вход/Регистрация</button>
-					<span><i class="fas fa-shopping-cart"></i></span>
+					<span style="cursor: pointer"><i class="fas fa-shopping-cart"></i></span>
 				</div>
 			</div>
 			<div class="headerMenu_view">
@@ -75,18 +86,30 @@
 						<a href="#!torsher"><p>Торшеры</p></a>
 					</li>
 					<li id="tableBlock">
-						<a href="#!bra"><p>Настольный свет</p></a>
+						<a href="#!light"><p>Настольный свет</p></a>
 					</li>
 					<li id="sconceBlock">
 						<a href="#!bra"><p>Бра</p></a>
 					</li>
 				</ul>
-				<p>Информация</p>
+				<p style="cursor: pointer"><a href="#!info">Информация</a></p>
 			</div>
 		</header>
-		<div bz-slider delay="delay" autoplay="true" class="slider no_display" id="mainContent">
-			<div class="bz-slide" ng-repeat="(i, slide) in c.slides" ng-show="i == $slideIndex" ng-class="slide.class">
-				<img ng-src="{{ slide.image }}" />
+		<div id="mainContent" class="no_display">
+			<div bz-slider delay="delay" autoplay="true" class="slider">
+				<div class="bz-slide" ng-repeat="(i, slide) in c.slides" ng-show="i == $slideIndex" ng-class="slide.class">
+					<img ng-src="{{ slide.image }}" />
+				</div>
+			</div>
+			<div class="main_info">
+				<p>All you need is LIGHT</p>
+				<div class="text">
+					<img src="Content/img/img10.jpg" width="520" height="400">
+					<p>
+						Искусственное освещение улучшило жизнь человека, сделав её ярче и разнообразнее. Оборудование, которое используют для его создания, разнообразно и обладает определёнными характеристиками. 
+						Интернет-магазин LIGHT предлагает широкий выбор дизайнерских изделий разного вида и ценовой категории. LIGHT - это стильное освещение и эксклюзивный модельный ряд.
+					</p>
+				</div>
 			</div>
 		</div>
 		<div ng-view> </div>

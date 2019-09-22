@@ -1,0 +1,27 @@
+.multiSelectium__filter_wrap { width: 100%; display: flex; }
+.multiSelectium__filter_wrap input { margin: 10px; padding-right: 10px; }
+.multiSelectium__filter_wrap span { position: absolute; top: 23px; right: 16px; font-size: 10px; color: grey;}
+.multiSelect__view { width: 100%; border-radius: 3px; border: 1px solid #ebebee; padding: 0 5px 0 5px; height: 32px; font-size: 14px; font-weight: normal; font-style: normal; line-height: 1.29; letter-spacing: -0.13px; color: #333333;}
+.multiSelect__view:hover {  border: 1px solid #9e9faf; }
+.multiSelect__view li:hover { background-color: white; cursor: default;}
+.multiSelectium__paddding_left { padding-left: 32px !important; }
+.multiSelect__view .dropdownList__options {margin-left: 0!important}
+.multiSelect__view .dropdownList__title{
+    justify-content: space-between;
+    padding-left: 5px
+}
+.multiSelect__view p {
+    display: block;
+    padding-top: 6px;
+    font-size: 14px;
+    color: #333;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.multiSelect__view .placeholder {
+    margin-right: auto;
+    margin-left: -4px;
+    color:#333333;
+    opacity: 0.5; 
+}

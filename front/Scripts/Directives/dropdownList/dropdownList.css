@@ -1,0 +1,13 @@
+.dropdownList__area { display: block; background-color: white; }
+.dropdownList__area .fa-bars { width: 16px; height: 16px; }
+.dropdownList__title { display: flex; flex-direction: row; width: 100%; height: 100%; justify-content: flex-end; padding-right: 6px; align-items: center; color: #9e9faf; cursor: pointer; }
+.dropdownList__title p { height: 100%; font-size: 12px; line-height: 1.33; letter-spacing: -0.1px; color: #9e9faf; display: flex; align-items: center; word-break: break-all; }
+.dropdownList__title i { height: 16px; width: 11px; color: #9e9faf; font-size: 12px; margin-right: 6px; }
+.dropdownList__title .fa-chevron-down { width: 8px; color: #9e9faf; font-size: 12px; }
+.dropdownList__user_icon { width: 11px; height: 16px; font-size: 12px; font-weight: normal; font-style: normal; font-stretch: normal; line-height: 1.33; letter-spacing: -0.1px; text-align: center; color: #9e9faf; display: inline-block; margin-right: 10px; }
+.dropdownList__arrow_icon { display: inline-block; margin-left: 8px; padding-top: 2px; z-index: 100;}
+.dropdownList__options { background-color: white; margin-left: -30px; position: absolute; z-index: 101; overflow-y: auto; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1)}
+.dropdownList ul { list-style: none; margin: 0; padding: 0; padding-bottom: 8px; padding-top: 8px; }
+.dropdownList li { height: 32px; padding-bottom: 8px; padding-left: 20px; padding-right: 20px; padding-top: 8px; font-size: 14px; text-decoration: none; outline: none; color: #333333; white-space: nowrap; text-overflow: ellipsis; overflow: hidden;}
+.dropdownList li:hover, .dropdownList__option_active { cursor: pointer; background-color: #ebebee; color: white !important; }
+.dropdownList__margin_arrow {margin-right: 0 !important;}

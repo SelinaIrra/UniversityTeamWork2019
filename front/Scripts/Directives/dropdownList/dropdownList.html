@@ -1,0 +1,15 @@
+<div class="dropdownList__area">
+    <div id="{{dropdownListDirective.id}}_title" ng-click="toggleDropdownList()" class="dropdownList__title">
+        <div class="dropdownList__user_icon" ng-if="dropdownListDirective.icon">
+            <i class="{{dropdownListDirective.icon}}"></i>
+        </div>
+        <p>{{dropdownListDirective.name}}</p>
+        <div ng-if="dropdownListDirective.placeholder" class="placeholder">{{dropdownListDirective.placeholder}}</div>
+        <div ng-if="dropdownListDirective.name!=undefined" class="dropdownList__arrow_icon">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </div>
+    <div id="{{dropdownListDirective.id}}_list" class="no_display dropdownList__options dropdownList" collapsed>
+        <ul ng-transclude></ul>
+    </div>
+</div>
