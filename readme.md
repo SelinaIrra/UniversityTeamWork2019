@@ -25,3 +25,5 @@ frontend - Селина Ирина
 Используемые технологии: angularjs, kotlin/spring boot
 
 API doc: https://drive.google.com/file/d/1tmFQ2eOl9hcoh4ZNrPxE7e-G8MtDx4qt/view?usp=sharing
+
+Репозиторий сервера: https://github.com/dmitrykochanov/lightingstore-server
