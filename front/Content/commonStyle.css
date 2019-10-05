@@ -94,3 +94,20 @@ header .block span { font-size: 16px; text-align: end;}
 .main_info > .text > p {margin-left: 50px; text-align: center; font-size: 20px; padding-top: 30px;}
 
 .slider img {width: 100%;}
+
+.multi_selectium { width: 200px; display: inline-block; margin-right: 20px; }
+.options_block {display: flex; margin: 15px 0;}
+.price_range {display: flex; align-items: center; color: #9e9faf; }
+.price_range>*{margin-right: 10px;}
+
+.items { display: flex; flex-direction: row; flex-wrap: wrap; align-items: center; justify-content: center; }
+.user_star { cursor: pointer; position: absolute; margin: 5px; color:darkgoldenrod; margin-left: -5px; font-size: 15px; }
+.item { display: flex; flex-direction: column; align-items: flex-end; width: 250px; margin: 20px; margin-bottom: 10px; cursor: pointer;}
+.item > div { display: flex; justify-content: space-between; width: 100%; margin-top: 8px }
+.item_block { border: 1px solid #ebebee; margin: 30px; }
+
+.title { font-size: 16px; font-weight: 800; font-size: 18px }
+.item_option {color: #788d9f; margin-right: 5px; font-size: 16px;}
+.margin_auto { margin-top: auto; margin-left: auto; }
+.item_btns{margin-top: 10px; font-size: 20px; margin-left: auto;}
+.item_btns>span{cursor: pointer;}

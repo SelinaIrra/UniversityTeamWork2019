@@ -8,12 +8,18 @@
 	<link rel="stylesheet" type="text/css" href="Content/bootstrap/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="Content/AngularJS/angular-material.min.css" />
 	<link rel="stylesheet" type="text/css" href="Content/Plugins/airDataPicker/css/datepicker.min.css" />
-    <link rel="stylesheet" type="text/css" href="Content/Plugins/bz-slider.css">
+	<link rel="stylesheet" type="text/css" href="Content/Plugins/bz-slider.css">
+	<link rel="stylesheet" type="text/css" href="Content/Plugins/jquery-ui.css">
 	<link rel="stylesheet" type="text/css" href="Content/commonStyle.css" />
 
-	<link rel="stylesheet" type="text/css" href="Scripts/Directives/dropdownList/dropdownList.css"></link>
-	<link rel="stylesheet" type="text/css" href="Scripts/Directives/multipleSelectium/multipleSelectium.css"></link>
-	<link rel="stylesheet" type="text/css" href="Scripts/Directives/modal/modal.css"></link>
+	<link rel="stylesheet" type="text/css" href="Scripts/Directives/dropdownList/dropdownList.css">
+	</link>
+	<link rel="stylesheet" type="text/css" href="Scripts/Directives/multipleSelectium/multipleSelectium.css">
+	</link>
+	<link rel="stylesheet" type="text/css" href="Scripts/Directives/selectium/selectium.css">
+	</link>
+	<link rel="stylesheet" type="text/css" href="Scripts/Directives/modal/modal.css">
+	</link>
 
 	<link href="fontawesome/css/all.css" rel="stylesheet">
 	<link href="fontawesome/css/fontawesome.css" rel="stylesheet">
@@ -39,6 +45,7 @@
 
 	<script type="text/javascript" src="Scripts/Directives/dropdownList/dropdownList.js"></script>
 	<script type="text/javascript" src="Scripts/Directives/multipleSelectium/multipleSelectium.js"></script>
+	<script type="text/javascript" src="Scripts/Directives/selectium/selectium.js"></script>
 	<script type="text/javascript" src="Scripts/Directives/modal/modal.js"></script>
 
 	<script type="text/javascript" src="Scripts/Controllers/cartCtrl.js"></script>
@@ -58,6 +65,23 @@
 </head>
 
 <body data-ng-controller="IndexController as c">
+	<modal modalName="modalItem" id="modalItem" idTool="items" ng-cloak>
+		<div style="display: flex">
+			<img src="{{c.itemsSrc}}" width="300" height="300">
+			<div style="display: flex; flex-direction: column; margin-left: 20px">
+				<p class="title">{{c.itemName}}</p>
+				<div style="margin: 20px 0">
+					<p ng-if="c.itemMaterial"><span class="item_option">Материал:</span>{{c.itemMaterial}}</p>
+					<p ng-if="c.itemLamps"><span class="item_option">Количество ламп:</span>{{c.itemLamps}}</p>
+					<p ng-if="c.itemWidth"><span class="item_option">Ширина:</span>{{c.itemWidth}}см</p>
+					<p ng-if="c.itemHeight"><span class="item_option">Высота:</span>{{c.itemHeight}}см</p>
+					<p ng-if="c.itemColor"><span class="item_option">Цвет:</span>{{c.itemColor}}</p>
+				</div>
+				<p class="title margin_auto">{{c.itemPrice}} <i class="fas fa-ruble-sign"></i></p>
+				<div class="item_btns"><span style="margin-right: 10px; color: darkgoldenrod;"><i class="far fa-star"></i></span><span><i class="fas fa-cart-plus"></i></span></div>
+			</div>
+		</div>
+	</modal>
 	<div class="main">
 		<header>
 			<div class="header">
@@ -74,22 +98,34 @@
 			<div class="headerMenu_view">
 				<ul>
 					<li id="patronsBlock">
-						<a href="#!patron"><p>Патроны</p></a>
+						<a href="#!patron">
+							<p>Патроны</p>
+						</a>
 					</li>
 					<li id="lampsBlock">
-						<a href="#!lamp"><p>Лампочки Эдисона</p></a>
+						<a href="#!lamp">
+							<p>Лампочки Эдисона</p>
+						</a>
 					</li>
 					<li id="soffitBlock">
-						<a href="#!soffit"><p>Подвесной свет</p></a>
+						<a href="#!soffit">
+							<p>Подвесной свет</p>
+						</a>
 					</li>
 					<li id="floorBlock">
-						<a href="#!torsher"><p>Торшеры</p></a>
+						<a href="#!torsher">
+							<p>Торшеры</p>
+						</a>
 					</li>
 					<li id="tableBlock">
-						<a href="#!light"><p>Настольный свет</p></a>
+						<a href="#!light">
+							<p>Настольный свет</p>
+						</a>
 					</li>
 					<li id="sconceBlock">
-						<a href="#!bra"><p>Бра</p></a>
+						<a href="#!bra">
+							<p>Бра</p>
+						</a>
 					</li>
 				</ul>
 				<p style="cursor: pointer"><a href="#!info">Информация</a></p>
@@ -97,7 +133,8 @@
 		</header>
 		<div id="mainContent" class="no_display">
 			<div bz-slider delay="delay" autoplay="true" class="slider">
-				<div class="bz-slide" ng-repeat="(i, slide) in c.slides" ng-show="i == $slideIndex" ng-class="slide.class">
+				<div class="bz-slide" ng-repeat="(i, slide) in c.slides" ng-show="i == $slideIndex"
+					ng-class="slide.class">
 					<img ng-src="{{ slide.image }}" />
 				</div>
 			</div>
@@ -106,8 +143,10 @@
 				<div class="text">
 					<img src="Content/img/img10.jpg" width="520" height="400">
 					<p>
-						Искусственное освещение улучшило жизнь человека, сделав её ярче и разнообразнее. Оборудование, которое используют для его создания, разнообразно и обладает определёнными характеристиками. 
-						Интернет-магазин LIGHT предлагает широкий выбор дизайнерских изделий разного вида и ценовой категории. LIGHT - это стильное освещение и эксклюзивный модельный ряд.
+						Искусственное освещение улучшило жизнь человека, сделав её ярче и разнообразнее. Оборудование,
+						которое используют для его создания, разнообразно и обладает определёнными характеристиками.
+						Интернет-магазин LIGHT предлагает широкий выбор дизайнерских изделий разного вида и ценовой
+						категории. LIGHT - это стильное освещение и эксклюзивный модельный ряд.
 					</p>
 				</div>
 			</div>

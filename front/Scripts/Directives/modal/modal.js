@@ -5,9 +5,6 @@ var modal = function () {
         transclude: true,
         scope: {},
         link: function (scope, element, attrs, ctrl) {
-            scope.modalDirective = {
-                title: attrs.headline
-            }
 
             let el = $(element);
             let modalName = attrs.modalname;
@@ -15,13 +12,18 @@ var modal = function () {
             let idtool = attrs.idtool;
 
             function showModal() {
+                $('body').css('overflow-y', 'hidden');
+                el.css('top', document.documentElement.scrollTop + 'px');
                 el.removeClass('no_display');
             }
 
             scope.closeModal = function () {
                 if (el.hasClass('no_display')) return;
                 scope.$broadcast('closingModal');
+                scope.$emit('closingModal');
                 el.addClass('no_display');
+                $('body').css('overflow-y', 'auto');
+                el.css('top', 0);
             }
 
             scope.$on('closeModal', scope.closeModal);
@@ -31,7 +33,10 @@ var modal = function () {
                     let target = $(event.target).closest("[name~=" + modalName + "]");
                     if (target.length) {
                         let data = target.attr('modaldata');
-                        if (data) scope.$broadcast('sentModalData', data);
+                        if (data) {
+                            scope.$broadcast('sentModalData', data);
+                            scope.$emit('sentModalData', data);
+                        }
                         showModal();
                         event.stopPropagation();
                     }
@@ -46,6 +51,6 @@ var modal = function () {
             })
 
         },
-        templateUrl: 'Scripts/Components/modal/modal.html'
+        templateUrl: 'Scripts/Directives/modal/modal.html'
     }
 }

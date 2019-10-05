@@ -1,3 +1,38 @@
 <div>
 	<h3>Торшеры</h3>
+	<div class="options_block" style="margin-top: 30px">
+		<selectium class="selectium" id="torsher_sort" options="torsherSortOptions" values="torsherSortValues"
+			default="torsherSortDefault" name="torsherSort"> </selectium>
+	</div>
+	<div class="price_range">
+		<p>Диапазон цен:</p>
+		<div id="torsherPrice" style="width: 200px"></div>
+		<div id="torsherPriceBlock" class="price_range">
+			от <p id="priceFrom" style="margin: 5px">0</p> - до <p style="margin: 5px" id="priceTo">30000</p>
+		</div>
+	</div>
+	<div class="options_block" style="margin-bottom: 30px">
+		<multiple-selectium class="multi_selectium" id="torsher_color" options="torsherColorOptions"
+			values="torsherColorValues" placeholder="Цвет" name="torsherColor"> </multiple-selectium>
+		<multiple-selectium class="multi_selectium" id="torsher_material" options="torsherMaterialOptions"
+			values="torsherMaterialValues" placeholder="Материал" name="torsherMaterial"> </multiple-selectium>
+		<multiple-selectium class="multi_selectium" id="torsher_height" options="torsherHeightOptions"
+			values="torsherHeightValues" placeholder="Высота" name="torsherHeight"> </multiple-selectium>
+		<multiple-selectium class="multi_selectium" id="torsher_width" options="torsherWidthOptions"
+			values="torsherWidthValues" placeholder="Ширина" name="torsherWidth"> </multiple-selectium>
+		<multiple-selectium class="multi_selectium" id="torsher_lamps" options="torsherLampOptions"
+			values="torsherLampValues" placeholder="Количество ламп" name="torsherLamps"> </multiple-selectium>
+	</div>
+	<div class="items" id="items">
+		<div ng-repeat="item in items" class="item_block">
+			<div class="item" name="modalItem" modalData={{getModalData($index)}}>
+				<span class="user_star"><i class="far fa-star"></i></span>
+				<img src="{{item.images}}" width="250px" height="250px">
+				<div>
+					<p>{{item.name}}</p>
+					<p style="font-weight: bold;">{{item.price}}<i class="fas fa-ruble-sign"></i></p>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>

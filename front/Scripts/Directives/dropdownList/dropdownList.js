@@ -48,6 +48,6 @@ var DropdownList = function() {
                 }
             })
         },
-        templateUrl: 'Scripts/Components/dropdownList/dropdownList.html'
+        templateUrl: 'Scripts/Directives/dropdownList/dropdownList.html'
         }
 }

@@ -88,6 +88,6 @@ var MultipleSelectium = function (UtilsService) {
                 }
             })
         },
-        templateUrl: 'Scripts/Components/multipleSelectium/multipleSelectium.html'
+        templateUrl: 'Scripts/Directives/multipleSelectium/multipleSelectium.html'
     }
 }

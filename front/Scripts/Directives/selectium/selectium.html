@@ -1,0 +1,9 @@
+<div>
+    <dropdown-list headline="{{selectDirective.default}}" id="{{selectDirective.id}}_selectium" close="true">
+        <div class="selectium__filter_wrap" ng-show="selectDirective.filtering" ng-click="$event.stopPropagation()">
+            <input type="text" class="input_mini" ng-model="filterModel" id="{{selectDirective.id}}_filter">
+            <span ng-click="filterModel=undefined"><i class="fas fa-times"></i></span>
+        </div>
+        <li ng-repeat="option in options|filter:filterModel" ng-click="setSelectedValue(option)" title="{{option}}">{{option}}</li>
+    </dropdown-list>
+</div>

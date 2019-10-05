@@ -4,6 +4,7 @@ Light.factory('UtilsService', UtilsService);
 
 Light.directive('dropdownList', DropdownList);
 Light.directive('multipleSelectium', MultipleSelectium);
+Light.directive('selectium', Selectium);
 Light.directive('modal', modal);
 
 Light.controller('IndexController', IndexController);

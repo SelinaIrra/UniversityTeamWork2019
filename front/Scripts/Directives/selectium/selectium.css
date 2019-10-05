@@ -1,0 +1,3 @@
+.selectium__filter_wrap { width: 100%; display: flex; }
+.selectium__filter_wrap input { margin: 10px; padding-right: 10px; }
+.selectium__filter_wrap span { position: absolute; top: 23px; right: 16px; font-size: 10px; color: grey;}
