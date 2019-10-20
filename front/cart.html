@@ -1,3 +1,32 @@
-<div data-ng-controller="cartCtrl as c">
+<div>
 	<h3>Корзина</h3>
+	<div style="display: flex; justify-content:center;flex-wrap:wrap">
+		<div>
+			<table class="cart_items">
+				<thead>
+					<tr>
+						<th colspan="2">Товар</th>
+						<th>Цена</th>
+						<th>Количество</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="item in items" id="itemCart_{{$index}}">
+						<td>{{item.name}}</td>
+						<td><img src="{{item.images}}" width="100px" height="100px"></td>
+						<td>{{item.price * item.count}}</td>
+						<td>{{item.count}}</td>
+						<td>
+							<span class="icon" style="margin-right: 15px"><i class="fas fa-minus"></i></span>
+							<span class="icon"><i class="fas fa-plus"></i></span></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div style="margin: 30px 0 0 30px">
+			<h4 style="margin-top: 10px">Общая сумма заказа: {{price}}<i class="fas fa-ruble-sign" style="font-size: 12px"></i></h4>
+			<button style="margin-top: 20px" id="orderBtn">Оформить заказ</button>
+		<div>
+	</div>
 </div>

@@ -32,6 +32,20 @@ var IndexController = function ($scope, $sce, $timeout, $http, $modal, $rootScop
         vm.itemWidth = null;
         vm.itemLamps = null;
     })
+
+    $scope.changeAuthBlock = function(id1, id2) {
+        $('#' + id2).removeClass('active');
+        $('#' + id1).addClass('active');
+
+        $('#' + id1.split('_')[0]).removeClass('no_display');
+        $('#' + id2.split('_')[0]).addClass('no_display');
+    }
+
+    $scope.auth = function() {
+        $('#authBtn').addClass('no_display');
+        $('#userInf').removeClass('no_display');
+        $scope.$broadcast('closeModal');
+    }
 }
 
 IndexController.$inject = ['$scope', '$sce', '$timeout', '$http', '$modal', '$rootScope'];

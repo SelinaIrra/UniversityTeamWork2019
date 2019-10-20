@@ -10,17 +10,23 @@ Light.directive('modal', modal);
 Light.controller('IndexController', IndexController);
 Light.controller('patronCtrl', patronCtrl);
 Light.controller('cartCtrl', cartCtrl);
+Light.controller('userCtrl', userCtrl);
 Light.controller('lightCtrl', lightCtrl);
 Light.controller('soffitCtrl', soffitCtrl);
 Light.controller('lampCtrl', lampCtrl);
 Light.controller('braCtrl', braCtrl);
 Light.controller('torsherCtrl', torsherCtrl);
+Light.controller('infoCtrl', infoCtrl);
 
 Light.config( ['$routeProvider', function($routeProvider) {
     $routeProvider
     .when('/light', {
       templateUrl: 'light.html',
       controller: 'lightCtrl'
+    })
+    .when('/user', {
+      templateUrl: 'user.html',
+      controller: 'userCtrl'
     })
     .when('/patron', {
       templateUrl: 'patron.html',
