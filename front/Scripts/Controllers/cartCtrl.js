@@ -1,38 +1,46 @@
-var cartCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope) {
+var cartCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope, UserService, CartActionService) {
     var vm = this;  
-    $scope.items = [
-        {
-            id: 532,
-            name: 'model 532',
-            descriptions: "",
-            images: 'Content/items/soffit/8.jpg',
-            lamps: 2,
-            price:'10200',
-            color:'grey',
-            width:40,
-            height:70,
-            material: 'metal',
-            count: 1
-        },
-        {
-            id: 2223,
-            name: 'model 2223',
-            descriptions: "",
-            images: 'Content/items/light/3.jpg',
-            lamps: 3,
-            price: '7000',
-            color:'grey',
-            width:56,
-            height:77,
-            material: 'wood',
-            count: 2
-        }
-    ]
+    UserService.setCartList();
 
-    $scope.price = $scope.items.reduce(function(sum, current) {
-        return sum + (current.price * current.count)
-    }, 0);
+    $scope.items = UserService.cartList;
+
+    function cartAmount() {
+        if ($scope.items.length) 
+            $scope.price = $scope.items.reduce(function(sum, current) {
+                return sum + current.price
+            }, 0);
+    }
+
+    
+    $scope.deleteItem = function(id){
+        CartActionService.deleteItem(id, function(){ 
+            $scope.items = $scope.items.filter(function(x){return x.id != id});
+            cartAmount();
+            $scope.$apply();
+        });
+    }
+
+    $scope.sentOrder = function() {
+        $.ajax({
+            url: 'https://lightingstore-server.herokuapp.com/orders',
+            type: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                'Authorization': 'Bearer ' + localStorage.getItem('lightToken') 
+            },
+            dataType: 'json',
+            data: JSON.stringify([$scope.items.map(x => x.id)]),
+            error: function (res) { 
+                alert('Ошибка(');
+            },
+            success: function (res) {
+                alert('Ваш заказ оформлен. Ждите.. чуда)');
+                let url = document.location.href.split("#")
+                document.location.href = url;
+            }
+        });
+    }
 
 }
 
-cartCtrl.$inject = ['$scope', '$sce', '$timeout', '$http', '$modal', '$rootScope'];
+cartCtrl.$inject = ['$scope', '$sce', '$timeout', '$http', '$modal', '$rootScope', 'UserService', 'CartActionService'];

@@ -5,12 +5,12 @@ var soffitCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope) {
         soffitColorValues: ['black', 'white', 'grey', 'red', 'blue', 'violet', 'green', 'brown', 'yellow', 'transparent'],
         soffitMaterialOptions: ['хрусталь', 'акрил', 'ракушки', 'мрамор', 'камень', 'бетон', 'пластик', 'стекло', 'металл', 'ткань', 'кожа', 'дерево'],
         soffitMaterialValues: ['crystal', 'acrylic', 'shells', 'marble', 'stone', 'concrete', 'plastic', 'glass', 'metal', 'fabric', 'leather', 'wood'],
-        soffitHeightOptions: ['до 43см', 'от 43см до 86см','от 86см до 129см', 'от 129см до 172см', 'от 172см'],
-        soffitHeightValues: ['43', '43-86','86-129', '129-172', '172'],
-        soffitWidthOptions: ['до 56см', 'от 56см до 112см','от 112см до 168см', 'от 168см до 224см', 'от 224см'],
-        soffitWidthValues: ['56', '56-112','112-168', '168-224', '224'],
-        soffitLampsOptions: ['до 2', 'от 2 до 3', 'от 3 до 6', 'от 6'],
-        soffitLampsValues: ['2', '2-3', '3-6', '6']
+        soffitHeightOptions: ['от 40 см', 'от 60 см','от 100 см', 'от 130 см', 'от 170 см'],
+        soffitHeightValues: ['40', '60','100', '130', '170'],
+        soffitWidthOptions: ['от 56 см', 'от 110 см', 'от 140 см', 'от 180 см', 'от 220 см'],
+        soffitWidthValues: ['56', '110', '140', '180', '200'],
+        soffitLampsOptions: ['от 2', 'от 4', 'от 6'],
+        soffitLampsValues: ['2', '4', '6']
     };
 
     $scope.selectiumComponent = {
@@ -30,6 +30,14 @@ var soffitCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope) {
           $( "#priceTo" )[0].innerText = ui.values[1];
         }
     });
+
+    $(document).ready(function () {
+        $('#soffit_sort')[0].addEventListener("changeSelectiumOption", function (event) {
+            $scope.sort = 'price';
+            $scope.sortDirection = event.detail.data.value == 'down' ? true : false
+            event.stopPropagation();
+        });
+    })
 
     $scope.getModalData = function(index) {
         return {
@@ -54,7 +62,7 @@ var soffitCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope) {
           descriptions: "",
           images: 'Content/items/soffit/1.jpg',
           lamps: 1,
-          price: '2300',
+          price: 2300,
           color:'transparent',
           width: 30,
           height: 50,
@@ -66,7 +74,7 @@ var soffitCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope) {
           descriptions: "",
           images: 'Content/items/soffit/2.jpg',
           lamps: 1,
-          price:'3700',
+          price: 3700,
           color:'yellow',
           width:51,
           height:55,
@@ -78,7 +86,7 @@ var soffitCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope) {
           descriptions: "",
           images: 'Content/items/soffit/3.jpg',
           lamps: 3,
-          price: '7000',
+          price: 7000,
           color:'grey',
           width:56,
           height:77,
@@ -90,7 +98,7 @@ var soffitCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope) {
           descriptions: "",
           images: 'Content/items/soffit/4.jpg',
           lamps: 2,
-          price:'2200',
+          price: 2200,
           color:'grey',
           width:89,
           height:67,
@@ -102,7 +110,7 @@ var soffitCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope) {
           descriptions: "",
           images: 'Content/items/soffit/5.jpg',
           lamps: 2,
-          price:'6140',
+          price: 6140,
           color:'yellow',
           width:56,
           height:94,
@@ -114,7 +122,7 @@ var soffitCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope) {
           descriptions: "",
           images: 'Content/items/soffit/6.jpg',
           lamps: 2,
-          price:'8800',
+          price: 8800,
           color:'black',
           width:44,
           height:77,
@@ -126,7 +134,7 @@ var soffitCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope) {
           descriptions: "",
           images: 'Content/items/soffit/7.jpg',
           lamps: 3,
-          price:'9000',
+          price: 9000,
           color:'black',
           width:44,
           height:34,
@@ -138,7 +146,7 @@ var soffitCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope) {
           descriptions: "",
           images: 'Content/items/soffit/8.jpg',
           lamps: 2,
-          price:'10200',
+          price: 10200,
           color:'grey',
           width:40,
           height:70,
@@ -150,7 +158,7 @@ var soffitCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope) {
           descriptions: "",
           images: 'Content/items/soffit/9.jpg',
           lamps: 2,
-          price:'12800',
+          price: 12800,
           color:'white',
           width:44,
           height:80,
@@ -162,7 +170,7 @@ var soffitCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope) {
           descriptions: "",
           images: 'Content/items/soffit/10.jpg',
           lamps: 2,
-          price:'7300',
+          price: 7300,
           color:'black',
           width: 55,
           height: 100,
@@ -174,7 +182,7 @@ var soffitCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope) {
           descriptions: "",
           images: 'Content/items/soffit/11.jpg',
           lamps: 3,
-          price:'22300',
+          price: 22300,
           color:'white',
           width: 34,
           height: 44,
@@ -186,7 +194,7 @@ var soffitCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope) {
           descriptions: "",
           images: 'Content/items/soffit/12.jpg',
           lamps: 2,
-          price:'9400',
+          price: 9400,
           color: 'white',
           width: 20,
           height: 50,

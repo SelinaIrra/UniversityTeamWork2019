@@ -106,7 +106,7 @@ readers do not read off random characters that represent icons */
 .#{$fa-css-prefix}-beer:before { content: fa-content($fa-var-beer); }
 .#{$fa-css-prefix}-behance:before { content: fa-content($fa-var-behance); }
 .#{$fa-css-prefix}-behance-square:before { content: fa-content($fa-var-behance-square); }
-.#{$fa-css-prefix}-bell:before { content: fa-content($fa-var-bell); }
+.#{$fa-css-prefix}-:before { content: fa-content($fa-var-bell); }
 .#{$fa-css-prefix}-bell-slash:before { content: fa-content($fa-var-bell-slash); }
 .#{$fa-css-prefix}-bezier-curve:before { content: fa-content($fa-var-bezier-curve); }
 .#{$fa-css-prefix}-bible:before { content: fa-content($fa-var-bible); }

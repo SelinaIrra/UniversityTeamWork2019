@@ -1,6 +1,11 @@
 var Light = angular.module('Light', ['ngSanitize', 'ngMaterial', 'ngMessages', 'ui.bootstrap', 'ngAnimate', 'ngRoute', 'bzSlider']);
 
 Light.factory('UtilsService', UtilsService);
+Light.factory('UserService', UserService);
+Light.factory('CartActionService', CartActionService);
+Light.factory('FavourActionService', FavourActionService);
+Light.factory('ItemsService', ItemsService);
+
 
 Light.directive('dropdownList', DropdownList);
 Light.directive('multipleSelectium', MultipleSelectium);

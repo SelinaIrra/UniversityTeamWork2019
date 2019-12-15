@@ -6,8 +6,8 @@ var patronCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope) {
     patronColorValues: ['grey', 'red', 'brown', 'yellow'],
     patronMaterialOptions: ['металл'],
     patronMaterialValues: ['metal'],
-    patronHeightOptions: ['от 6см до 8см', 'от 8см'],
-    patronHeightValues: ['6-8', '8']
+    patronHeightOptions: ['от 6 см', 'от 8 см'],
+    patronHeightValues: ['6', '8']
   };
 
   $scope.selectiumComponent = {
@@ -15,6 +15,14 @@ var patronCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope) {
     patronSortValues: ['up', 'down'],
     patronSortDefault: 'Сортировка'
   }
+
+  $(document).ready(function () {
+    $('#patron_sort')[0].addEventListener("changeSelectiumOption", function (event) {
+        $scope.sort = 'price';
+        $scope.sortDirection = event.detail.data.value == 'down' ? true : false
+        event.stopPropagation();
+    });
+})
 
   $("#patronPrice").slider({
     range: true,
@@ -49,7 +57,7 @@ var patronCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope) {
       descriptions: "",
       images: 'Content/items/patron/1.jpg',
       lamps: 1,
-      price: '2300',
+      price: 2300,
       color: 'transparent',
       width: 30,
       height: 50,
@@ -61,7 +69,7 @@ var patronCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope) {
       descriptions: "",
       images: 'Content/items/patron/2.jpg',
       lamps: 1,
-      price: '3700',
+      price: 3700,
       color: 'yellow',
       width: 51,
       height: 55,
@@ -73,7 +81,7 @@ var patronCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope) {
       descriptions: "",
       images: 'Content/items/patron/3.jpg',
       lamps: 3,
-      price: '7000',
+      price: 7000,
       color: 'grey',
       width: 56,
       height: 77,
@@ -85,7 +93,7 @@ var patronCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope) {
       descriptions: "",
       images: 'Content/items/patron/4.jpg',
       lamps: 2,
-      price: '2200',
+      price: 2200,
       color: 'grey',
       width: 89,
       height: 67,
@@ -97,7 +105,7 @@ var patronCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope) {
       descriptions: "",
       images: 'Content/items/patron/5.jpg',
       lamps: 2,
-      price: '6140',
+      price: 6140,
       color: 'yellow',
       width: 56,
       height: 94,
@@ -109,7 +117,7 @@ var patronCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope) {
       descriptions: "",
       images: 'Content/items/patron/6.jpg',
       lamps: 2,
-      price: '8800',
+      price: 8800,
       color: 'black',
       width: 44,
       height: 77,
@@ -121,7 +129,7 @@ var patronCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope) {
       descriptions: "",
       images: 'Content/items/patron/7.jpg',
       lamps: 3,
-      price: '9000',
+      price: 9000,
       color: 'black',
       width: 40,
       height: 70,
@@ -133,7 +141,7 @@ var patronCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope) {
       descriptions: "",
       images: 'Content/items/patron/8.jpg',
       lamps: 2,
-      price: '10200',
+      price: 10200,
       color: 'grey',
       width: 40,
       height: 70,
@@ -145,7 +153,7 @@ var patronCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope) {
       descriptions: "",
       images: 'Content/items/patron/9.jpg',
       lamps: 2,
-      price: '12800',
+      price: 12800,
       color: 'white',
       width: 44,
       height: 80,
@@ -157,7 +165,7 @@ var patronCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope) {
       descriptions: "",
       images: 'Content/items/patron/10.jpg',
       lamps: 2,
-      price: '7300',
+      price: 7300,
       color: 'black',
       width: 55,
       height: 100,

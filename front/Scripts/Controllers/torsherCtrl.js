@@ -6,12 +6,12 @@ var torsherCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope) {
         torsherColorValues: ['black', 'white', 'grey', 'brown', 'yellow', 'transparent'],
         torsherMaterialOptions: ['хрусталь', 'мрамор', 'камень', 'пластик', 'стекло', 'металл', 'ткань', 'дерево'],
         torsherMaterialValues: ['crystal', 'marble', 'stone', 'plast', 'glass', 'metal', 'fabric', 'wood'],
-        torsherHeightOptions: ['от 43см до 86см','от 86см до 130см', 'от 130см до 173см', 'от 173см'],
-        torsherHeightValues: ['43-86','86-130', '130-173', '174'],
-        torsherWidthOptions: ['от 29см до 58см','от 58см до 87см', 'от 87см до 116см', 'от 116см'],
-        torsherWidthValues: ['29-58','58-87', '87-116', '116'],
-        torsherLampOptions: ['до 2', 'от 2 до 4', 'от 4 до 7', 'от 7'],
-        torsherLampValues: ['2', '2-4', '4-7', '7']
+        torsherHeightOptions: ['от 40 см','от 90 см', 'от 130 см', 'от 170 см'],
+        torsherHeightValues: ['40','90', '130', '170'],
+        torsherWidthOptions: ['от 30 см','от 60 см', 'от 90 см', 'от 110см'],
+        torsherWidthValues: ['30','60', '90', '110'],
+        torsherLampOptions: ['от 2', 'от 4', 'от 7'],
+        torsherLampValues: ['2', '4', '7']
     };
 
     $scope.selectiumComponent = {
@@ -31,6 +31,15 @@ var torsherCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope) {
           $( "#priceTo" )[0].innerText = ui.values[1];
         }
     });
+
+    $(document).ready(function () {
+        $('#torsher_sort')[0].addEventListener("changeSelectiumOption", function (event) {
+            $scope.sort = 'price';
+            $scope.sortDirection = event.detail.data.value == 'down' ? true : false
+            event.stopPropagation();
+        });
+
+    })
 
     $scope.getModalData = function(index) {
         return {
@@ -54,7 +63,7 @@ var torsherCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope) {
           descriptions: "",
           images: 'Content/items/torsher/1.jpg',
           lamps: 1,
-          price: '2300',
+          price: 2300,
           color:'transparent',
           width: 30,
           height: 50,
@@ -66,7 +75,7 @@ var torsherCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope) {
           descriptions: "",
           images: 'Content/items/torsher/2.jpg',
           lamps: 1,
-          price:'3700',
+          price: 3700,
           color:'yellow',
           width:51,
           height:55,
@@ -78,7 +87,7 @@ var torsherCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope) {
           descriptions: "",
           images: 'Content/items/torsher/3.jpg',
           lamps: 3,
-          price: '7000',
+          price: 7000,
           color:'grey',
           width:56,
           height:77,
@@ -90,7 +99,7 @@ var torsherCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope) {
           descriptions: "",
           images: 'Content/items/torsher/4.jpg',
           lamps: 2,
-          price:'2200',
+          price: 2200,
           color:'grey',
           width:89,
           height:67,
@@ -102,7 +111,7 @@ var torsherCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope) {
           descriptions: "",
           images: 'Content/items/torsher/5.jpg',
           lamps: 2,
-          price:'6140',
+          price: 6140,
           color:'yellow',
           width:56,
           height:94,
@@ -114,7 +123,7 @@ var torsherCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope) {
           descriptions: "",
           images: 'Content/items/torsher/6.jpg',
           lamps: 2,
-          price:'8800',
+          price: 8800,
           color:'black',
           width:44,
           height:77,
@@ -126,7 +135,7 @@ var torsherCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope) {
           descriptions: "",
           images: 'Content/items/torsher/7.jpg',
           lamps: 3,
-          price:'9000',
+          price: 9000,
           color:'black',
           width:55,
           height:100,
@@ -138,7 +147,7 @@ var torsherCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope) {
           descriptions: "",
           images: 'Content/items/torsher/8.jpg',
           lamps: 2,
-          price:'10200',
+          price: 10200,
           color:'grey',
           width:40,
           height:70,
@@ -150,7 +159,7 @@ var torsherCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope) {
           descriptions: "",
           images: 'Content/items/torsher/9.jpg',
           lamps: 2,
-          price:'12800',
+          price: 12800,
           color:'white',
           width:44,
           height:80,
@@ -162,7 +171,7 @@ var torsherCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope) {
           descriptions: "",
           images: 'Content/items/torsher/10.jpg',
           lamps: 2,
-          price:'7300',
+          price: 7300,
           color:'black',
           width: 55,
           height: 100,
@@ -174,7 +183,7 @@ var torsherCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope) {
           descriptions: "",
           images: 'Content/items/torsher/11.jpg',
           lamps: 3,
-          price:'22300',
+          price: 22300,
           color:'white',
           width: 34,
           height: 44,
@@ -186,7 +195,7 @@ var torsherCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope) {
           descriptions: "",
           images: 'Content/items/torsher/12.jpg',
           lamps: 2,
-          price:'9400',
+          price: 9400,
           color: 'white',
           width: 20,
           height: 50,

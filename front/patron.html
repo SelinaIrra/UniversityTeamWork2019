@@ -20,9 +20,8 @@
 			values="patronHeightValues" placeholder="Высота" name="patronHeight"> </multiple-selectium>
 	</div>
 	<div class="items" id="items">
-		<div ng-repeat="item in items" class="item_block">
+		<div ng-repeat="item in items | orderBy : sort : sortDirection" class="item_block">
 			<div class="item" name="modalItem" modalData={{getModalData($index)}}>
-				<span class="user_star"><i class="far fa-star"></i></span>
 				<img src="{{item.images}}" width="250px" height="250px">
 				<div>
 					<p>{{item.name}}</p>

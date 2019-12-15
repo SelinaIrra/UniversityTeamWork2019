@@ -1,13 +1,12 @@
 <div>
 	<h3>Личный кабинет</h3>
+	<a href="" ng-if="admin" style="margin-top: 20px">Админка</a>
 	<div style="display: flex; justify-content: center; margin-top: 20px">
 		<div class="user_inf">
-			<span><i class="fas fa-user-edit"></i></span>
 			<div>
-				<input placeholder="Имя" type="text" id="user_name">
-				<input placeholder="Логин" type="text" id="user_login">
-				<input placeholder="Телефон" type="text" id="user_phone">
-				<input placeholder="Адрес" type="text" id="user_address">
+				<input title="Имя" readonly type="text" id="user_name">
+				<input title="Логин" readonly type="text" id="user_login">
+				<input title="Email" readonly type="email" id="user_email">
 			</div>
 		</div>
 		<div>
@@ -20,6 +19,7 @@
 					<tr ng-repeat="item in selectedItems" id="itemCart_{{$index}}">
 						<td>{{item.name}}</td>
 						<td><img src="{{item.images}}" width="100px" height="100px"></td>
+						<td><span class="icon" ng-click="deleteItemFromFavour(item.id)" title="Удалить из избранного"><i class="fas fa-times"></i></span></td>
 					</tr>
 				</tbody>
 			</table>

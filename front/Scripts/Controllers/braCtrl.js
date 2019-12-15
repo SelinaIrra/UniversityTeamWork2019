@@ -5,18 +5,71 @@ var braCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope) {
         braColorValues: ['black', 'white', 'grey', 'red', 'blue', 'brown', 'yellow', 'transparent'],
         braMaterialOptions: ['хрусталь', 'ракушки', 'стекло', 'металл', 'ткань', 'дерево'],
         braMaterialValues: ['crystal', 'shells', 'glass', 'metal', 'fabric', 'wood'],
-        braHeightOptions: ['от 30см до 60см','от 60см до 90см', 'от 90см до 120см', 'от 120см'],
-        braHeightValues: ['30-60','60-90', '90-120', '120'],
-        braWidthOptions: ['от 10см до 20см','от 20см до 30см', 'от 30см до 40см', 'от 40см'],
-        braWidthValues: ['10-20','20-30', '30-40', '40'],
-        braLampOptions: ['до 2', 'от 2 до 4', 'от 9'],
-        braLampValues: ['2', '2-4', '9']
+        braHeightOptions: ['от 50 см', 'от 70 см', 'от 90 см', 'от 120см'],
+        braHeightValues: ['50', '70', '90', '120'],
+        braWidthOptions: ['от 10 см', 'от 20 см', 'от 30 см', 'от 40см'],
+        braWidthValues: ['10','20', '30', '40'],
+        braLampOptions: ['от 2', 'от 4', 'от 5'],
+        braLampValues: ['2', '4', '5']
     };
 
+    $scope.sort;
+    $scope.sortDirection;
+
+    $(document).ready(function () {
+        $('#bra_sort')[0].addEventListener("changeSelectiumOption", function (event) {
+            $scope.sort = 'price';
+            $scope.sortDirection = event.detail.data.value == 'down' ? true : false
+            event.stopPropagation();
+        });
+
+        $('#bra_color')[0].addEventListener("changeMultiSelectiumOptions", function (event) {
+            setFilters();            
+            event.stopPropagation();
+        });
+
+        $('#bra_material')[0].addEventListener("changeMultiSelectiumOptions", function (event) {
+            setFilters();            
+            event.stopPropagation();
+        });
+
+        $('#bra_width')[0].addEventListener("changeMultiSelectiumOptions", function (event) {
+            setFilters();            
+            event.stopPropagation();
+        });
+
+        $('#bra_height')[0].addEventListener("changeMultiSelectiumOptions", function (event) {
+            setFilters();            
+            event.stopPropagation();
+        });
+
+        $('#bra_lamps')[0].addEventListener("changeMultiSelectiumOptions", function (event) {
+            setFilters();            
+            event.stopPropagation();
+        });
+    })
+    
+    function setFilters() {
+        let colorArr = $('#bra_color').val().split(',');
+        let lampsArr = $('#bra_lamps').val().split(',');
+        let heightArr = $('#bra_height').val().split(',');
+        let widthArr = $('#bra_width').val().split(',');
+        let materialArr = $('#bra_material').val().split(',');
+
+        $scope.filterFunction = function (value) {
+            return ((Number(value.price) >= Number($( "#priceFrom" )[0].innerText) && Number(value.price) <= Number($( "#priceTo" )[0].innerText))
+                && ((widthArr.length == 1 && widthArr[0]== "") || widthArr.filter(x => {return Number(x) <= Number(value.width)}).length > 0)
+                && ((heightArr.length == 1 && heightArr[0]== "") || heightArr.filter(x => {return Number(x) <= Number(value.height)}).length > 0)
+                && ((materialArr.length == 1 && materialArr[0]== "") || materialArr.indexOf(value.material) > -1)
+                && ((colorArr.length == 1 && colorArr[0]== "") || colorArr.indexOf(value.color) > -1)
+                && ((lampsArr.length == 1 && lampsArr[0]== "") || lampsArr.filter(x => {return Number(x) <= Number(value.lamps)}).length > 0))
+        }
+    }
+
     $scope.selectiumComponent = {
-    braSortOptions: ["по возрастанию цены", "по убыванию цены"],
-    braSortValues: ['up', 'down'],
-    braSortDefault: 'Сортировка'
+        braSortOptions: ["по возрастанию цены", "по убыванию цены"],
+        braSortValues: ['up', 'down'],
+        braSortDefault: 'Сортировка'
     }
 
     $("#braPrice").slider({
@@ -28,6 +81,7 @@ var braCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope) {
         slide: function( event, ui ) {
           $( "#priceFrom" )[0].innerText = ui.values[0];
           $( "#priceTo" )[0].innerText = ui.values[1];
+          setFilters();
         }
     });
 
@@ -53,7 +107,7 @@ var braCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope) {
             descriptions: "",
             images: 'Content/items/bra/1.jpg',
             lamps: 1,
-            price: '2300',
+            price: 2300,
             color:'transparent',
             width: 30,
             height: 50,
@@ -65,7 +119,7 @@ var braCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope) {
             descriptions: "",
             images: 'Content/items/bra/2.jpg',
             lamps: 1,
-            price:'3700',
+            price: 3700,
             color:'yellow',
             width:51,
             height:55,
@@ -76,8 +130,8 @@ var braCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope) {
             name: 'model 1223',
             descriptions: "",
             images: 'Content/items/bra/3.jpg',
-            lamps: 3,
-            price: '7000',
+            lamps: 4,
+            price: 7000,
             color:'grey',
             width:56,
             height:77,
@@ -89,7 +143,7 @@ var braCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope) {
             descriptions: "",
             images: 'Content/items/bra/4.jpg',
             lamps: 2,
-            price:'2200',
+            price: 2200,
             color:'grey',
             width:89,
             height:67,
@@ -101,7 +155,7 @@ var braCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope) {
             descriptions: "",
             images: 'Content/items/bra/5.jpg',
             lamps: 2,
-            price:'6140',
+            price: 6140,
             color:'yellow',
             width:56,
             height:94,
@@ -113,7 +167,7 @@ var braCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope) {
             descriptions: "",
             images: 'Content/items/bra/6.jpg',
             lamps: 2,
-            price:'8800',
+            price: 8800,
             color:'black',
             width:44,
             height:77,
@@ -125,7 +179,7 @@ var braCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope) {
             descriptions: "",
             images: 'Content/items/bra/7.jpg',
             lamps: 3,
-            price:'9000',
+            price: 9000,
             color:'black',
             width:50,
             height:79,
@@ -137,7 +191,7 @@ var braCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope) {
             descriptions: "",
             images: 'Content/items/bra/8.jpg',
             lamps: 2,
-            price:'10200',
+            price: 10200,
             color:'grey',
             width:40,
             height:70,
@@ -149,7 +203,7 @@ var braCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope) {
             descriptions: "",
             images: 'Content/items/bra/9.jpg',
             lamps: 2,
-            price:'12800',
+            price: 12800,
             color:'white',
             width:44,
             height:80,
@@ -161,7 +215,7 @@ var braCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope) {
             descriptions: "",
             images: 'Content/items/bra/10.jpg',
             lamps: 2,
-            price:'7300',
+            price: 7300,
             color:'black',
             width: 55,
             height: 100,
@@ -173,7 +227,7 @@ var braCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope) {
             descriptions: "",
             images: 'Content/items/bra/11.jpg',
             lamps: 3,
-            price:'22300',
+            price: 22300,
             color:'white',
             width: 34,
             height: 44,
@@ -185,7 +239,7 @@ var braCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope) {
             descriptions: "",
             images: 'Content/items/bra/12.jpg',
             lamps: 2,
-            price:'9400',
+            price: 9400,
             color: 'white',
             width: 20,
             height: 50,

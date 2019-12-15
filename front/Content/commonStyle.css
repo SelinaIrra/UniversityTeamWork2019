@@ -127,3 +127,5 @@ header .block span { font-size: 16px; text-align: end;}
 .user_inf { display: flex; width: 400px; margin-right: 100px }
 .user_inf > span { margin-right: 8px; margin-top: -5px; color: #788d9f}
 .user_inf input { margin-bottom: 14px}
+
+.active_radio { background-color: #ebebee }

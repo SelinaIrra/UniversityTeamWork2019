@@ -2,10 +2,10 @@ var lampCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope) {
     var vm = this;
 
     $scope.multipleSelectiumComponent = {
-        lampWidthOptions: ['от 2cм', 'от 2см до 4см', 'от 4см до 7см', 'от 7см до 9см', 'от 9см'],
-        lampWidthValues: ['2', '2-4', '4-7', '7-9', '9'],
-        lampHeightOptions: ['от 6см до 9см', 'от 9см до 12', 'от 12см'],
-        lampHeightValues: ['6-9', '9-12', '12']
+        lampWidthOptions: ['2 см', '4 см', '7 см', '9 см', '12см'],
+        lampWidthValues: ['2', '4', '7', '9', '12'],
+        lampHeightOptions: ['от 6 см', 'от 9 см', 'от 10 см'],
+        lampHeightValues: ['6', '9', '10']
     };
 
     $scope.selectiumComponent = {
@@ -13,6 +13,17 @@ var lampCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope) {
         lampSortValues: ['up', 'down'],
         lampSortDefault: 'Сортировка'
     }
+
+    $scope.sort;
+    $scope.sortDirection;
+
+    $(document).ready(function () {
+        $('#lamp_sort')[0].addEventListener("changeSelectiumOption", function (event) {
+            $scope.sort = 'price';
+            $scope.sortDirection = event.detail.data.value == 'down' ? true : false
+            event.stopPropagation();
+        });
+    })
 
     $scope.getModalData = function(index) {
         return {
@@ -46,7 +57,7 @@ var lampCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope) {
             descriptions: "",
             images: 'Content/items/lamp/1.jpg',
             lamps: 1,
-            price: '2300',
+            price: 2300,
             color: 'transparent',
             width: 30,
             height: 50,
@@ -58,7 +69,7 @@ var lampCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope) {
             descriptions: "",
             images: 'Content/items/lamp/2.jpg',
             lamps: 1,
-            price: '3700',
+            price: 3700,
             color: 'yellow',
             width: 51,
             height: 55,
@@ -70,7 +81,7 @@ var lampCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope) {
             descriptions: "",
             images: 'Content/items/lamp/3.jpg',
             lamps: 3,
-            price: '7000',
+            price: 7000,
             color: 'grey',
             width: 56,
             height: 77,
@@ -82,7 +93,7 @@ var lampCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope) {
             descriptions: "",
             images: 'Content/items/lamp/4.jpg',
             lamps: 2,
-            price: '2200',
+            price: 2200,
             color: 'grey',
             width: 89,
             height: 67,
@@ -94,7 +105,7 @@ var lampCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope) {
             descriptions: "",
             images: 'Content/items/lamp/5.jpg',
             lamps: 2,
-            price: '6140',
+            price: 6140,
             color: 'yellow',
             width: 56,
             height: 94,
@@ -106,7 +117,7 @@ var lampCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope) {
             descriptions: "",
             images: 'Content/items/lamp/6.jpg',
             lamps: 2,
-            price: '8800',
+            price: 8800,
             color: 'black',
             width: 44,
             height: 77,
@@ -118,7 +129,7 @@ var lampCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope) {
             descriptions: "",
             images: 'Content/items/lamp/7.jpg',
             lamps: 3,
-            price: '9000',
+            price: 9000,
             color: 'black',
             width: 20,
             height: 40,
@@ -130,7 +141,7 @@ var lampCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope) {
             descriptions: "",
             images: 'Content/items/lamp/8.jpg',
             lamps: 2,
-            price: '10200',
+            price: 10200,
             color: 'grey',
             width: 40,
             height: 70,
@@ -142,7 +153,7 @@ var lampCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope) {
             descriptions: "",
             images: 'Content/items/lamp/9.jpg',
             lamps: 2,
-            price: '12800',
+            price: 12800,
             color: 'white',
             width: 44,
             height: 80,
@@ -154,7 +165,7 @@ var lampCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope) {
             descriptions: "",
             images: 'Content/items/lamp/10.jpg',
             lamps: 2,
-            price: '7300',
+            price: 7300,
             color: 'black',
             width: 55,
             height: 100,
@@ -166,7 +177,7 @@ var lampCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope) {
             descriptions: "",
             images: 'Content/items/lamp/11.jpg',
             lamps: 3,
-            price: '22300',
+            price: 22300,
             color: 'white',
             width: 34,
             height: 44,
@@ -178,7 +189,7 @@ var lampCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope) {
             descriptions: "",
             images: 'Content/items/lamp/12.jpg',
             lamps: 2,
-            price: '9400',
+            price: 9400,
             color: 'white',
             width: 20,
             height: 50,

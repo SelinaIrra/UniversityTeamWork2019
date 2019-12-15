@@ -23,10 +23,10 @@
 		<multiple-selectium class="multi_selectium" id="bra_lamps" options="braLampOptions" values="braLampValues"
 			placeholder="Количество ламп" name="braLamps"> </multiple-selectium>
 	</div>
+	
 	<div class="items" id="items">
-		<div ng-repeat="item in items" class="item_block">
+		<div ng-repeat="item in items | filter:filterFunction | orderBy : sort : sortDirection" class="item_block">
 			<div class="item" name="modalItem" modalData={{getModalData($index)}}>
-				<span class="user_star"><i class="far fa-star"></i></span>
 				<img src="{{item.images}}" width="250px" height="250px">
 				<div>
 					<p>{{item.name}}</p>

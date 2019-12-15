@@ -5,12 +5,12 @@ var lightCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope) {
         lightColorValues: ['black', 'white', 'grey', 'red', 'blue', 'brown', 'yellow', 'transparent'],
         lightMaterialOptions: ['хрусталь', 'ракушки', 'мрамор', 'камень', 'стекло', 'металл', 'ткань', 'кожа', 'дерево'],
         lightMaterialValues: ['crystal', 'shells', 'marble', 'stone', 'glass', 'metal', 'fabric', 'leather', 'wood'],
-        lightHeightOptions: ['от 19см до 38см','от 38см до 58см', 'от 58см до 77см', 'от 77см'],
-        lightHeightValues: ['19-38','38-58', '58-77', '77'],
-        lightWidthOptions: ['от 14см до 28см','от 28см до 42см', 'от 42см до 56см', 'от 56см'],
-        lightWidthValues: ['14-28','28-42', '42-56', '56'],
-        lightLampOptions: ['до 2', 'от 2 до 3', 'от 4'],
-        lightLampValues: ['2', '2-3', '4']
+        lightHeightOptions: ['от 20 см', 'от 40 см', 'от 60см', 'от 70 см'],
+        lightHeightValues: ['20', '40', '60', '70'],
+        lightWidthOptions: ['от 20 см','от 40 см', 'от 60 см'],
+        lightWidthValues: ['20', '40', '60'],
+        lightLampOptions: ['от 2', 'от 4'],
+        lightLampValues: ['2', '4']
     };
 
     $scope.selectiumComponent = {
@@ -18,6 +18,14 @@ var lightCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope) {
     lightSortValues: ['up', 'down'],
     lightSortDefault: 'Сортировка'
     }
+
+    $(document).ready(function () {
+        $('#light_sort')[0].addEventListener("changeSelectiumOption", function (event) {
+            $scope.sort = 'price';
+            $scope.sortDirection = event.detail.data.value == 'down' ? true : false
+            event.stopPropagation();
+        });
+    })
 
     $("#lightPrice").slider({
         range: true,
@@ -53,7 +61,7 @@ var lightCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope) {
             descriptions: "",
             images: 'Content/items/light/1.jpg',
             lamps: 1,
-            price: '2300',
+            price: 2300,
             color:'transparent',
             width: 30,
             height: 50,
@@ -65,7 +73,7 @@ var lightCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope) {
             descriptions: "",
             images: 'Content/items/light/2.jpg',
             lamps: 1,
-            price:'3700',
+            price: 3700,
             color:'yellow',
             width:51,
             height:55,
@@ -77,7 +85,7 @@ var lightCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope) {
             descriptions: "",
             images: 'Content/items/light/3.jpg',
             lamps: 3,
-            price: '7000',
+            price: 7000,
             color:'grey',
             width:56,
             height:77,
@@ -89,7 +97,7 @@ var lightCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope) {
             descriptions: "",
             images: 'Content/items/light/4.jpg',
             lamps: 2,
-            price:'2200',
+            price: 2200,
             color:'grey',
             width:89,
             height:67,
@@ -101,7 +109,7 @@ var lightCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope) {
             descriptions: "",
             images: 'Content/items/light/5.jpg',
             lamps: 2,
-            price:'6140',
+            price: 6140,
             color:'yellow',
             width:56,
             height:94,
@@ -113,7 +121,7 @@ var lightCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope) {
             descriptions: "",
             images: 'Content/items/light/6.jpg',
             lamps: 2,
-            price:'8800',
+            price: 8800,
             color:'black',
             width:44,
             height:77,
@@ -125,7 +133,7 @@ var lightCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope) {
             descriptions: "",
             images: 'Content/items/light/7.jpg',
             lamps: 3,
-            price:'9000',
+            price: 9000,
             color:'black',
             width:30,
             height:50,
@@ -137,7 +145,7 @@ var lightCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope) {
             descriptions: "",
             images: 'Content/items/light/8.jpg',
             lamps: 2,
-            price:'10200',
+            price: 10200,
             color:'grey',
             width:40,
             height:70,
@@ -149,7 +157,7 @@ var lightCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope) {
             descriptions: "",
             images: 'Content/items/light/9.jpg',
             lamps: 2,
-            price:'12800',
+            price: 12800,
             color:'white',
             width:44,
             height:80,
@@ -161,7 +169,7 @@ var lightCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope) {
             descriptions: "",
             images: 'Content/items/light/10.jpg',
             lamps: 2,
-            price:'7300',
+            price: 7300,
             color:'black',
             width: 55,
             height: 100,
@@ -173,7 +181,7 @@ var lightCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope) {
             descriptions: "",
             images: 'Content/items/light/11.jpg',
             lamps: 3,
-            price:'22300',
+            price: 22300,
             color:'white',
             width: 34,
             height: 44,
@@ -185,7 +193,7 @@ var lightCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope) {
             descriptions: "",
             images: 'Content/items/light/12.jpg',
             lamps: 2,
-            price:'9400',
+            price: 9400,
             color: 'white',
             width: 20,
             height: 50,
