@@ -8,25 +8,25 @@
 		<p>Диапазон цен:</p>
 		<div id="lightPrice" style="width: 200px"></div>
 		<div id="lightPriceBlock" class="price_range">
-			от <p id="priceFrom" style="margin: 5px">0</p> - до <p style="margin: 5px" id="priceTo">10000</p>
+			от <p id="priceFrom" style="margin: 5px">0</p> - до <p style="margin: 5px" id="priceTo">{{maxPrice}}</p>
 		</div>
 	</div>
 	<div class="options_block" style="margin-bottom: 30px">
 		<multiple-selectium class="multi_selectium" id="light_color" options="lightColorOptions"
-			values="lightColorValues" placeholder="Цвет" name="lightColor"> </multiple-selectium>
+			placeholder="Цвет" name="lightColor"> </multiple-selectium>
 		<multiple-selectium class="multi_selectium" id="light_material" options="lightMaterialOptions"
-			values="lightMaterialValues" placeholder="Материал" name="lightMaterial"> </multiple-selectium>
+			placeholder="Материал" name="lightMaterial"> </multiple-selectium>
 		<multiple-selectium class="multi_selectium" id="light_height" options="lightHeightOptions"
-			values="lightHeightValues" placeholder="Высота" name="lightHeight"> </multiple-selectium>
+			placeholder="Высота" name="lightHeight"> </multiple-selectium>
 		<multiple-selectium class="multi_selectium" id="light_width" options="lightWidthOptions"
-			values="lightWidthValues" placeholder="Ширина" name="lightWidth"> </multiple-selectium>
-		<multiple-selectium class="multi_selectium" id="light_lamps" options="lightLampOptions" values="lightLampValues"
+			placeholder="Ширина" name="lightWidth"> </multiple-selectium>
+		<multiple-selectium class="multi_selectium" id="light_lamps" options="lightLampOptions"
 			placeholder="Количество ламп" name="lightLamps"> </multiple-selectium>
 	</div>
 	<div class="items" id="items">
-		<div ng-repeat="item in items | orderBy : sort : sortDirection" class="item_block">
-			<div class="item" name="modalItem" modalData={{getModalData($index)}}>
-				<img src="{{item.images}}" width="250px" height="250px">
+		<div ng-repeat="item in items | filter:filterFunction | orderBy : sort : sortDirection" class="item_block">
+			<div class="item" name="modalItem" modalData={{getModalData(item.id)}} ng-click="setModalDataFunc()">
+				<img ng-src="{{item.image}}" width="250px" height="250px">
 				<div>
 					<p>{{item.name}}</p>
 					<p style="font-weight: bold;">{{item.price}}<i class="fas fa-ruble-sign"></i></p>

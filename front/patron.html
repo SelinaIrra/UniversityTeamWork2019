@@ -8,21 +8,21 @@
 		<p>Диапазон цен:</p>
 		<div id="patronPrice" style="width: 200px"></div>
 		<div id="patronPriceBlock" class="price_range">
-			от <p id="priceFrom" style="margin: 5px">0</p> - до <p style="margin: 5px" id="priceTo">1000</p>
+			от <p id="priceFrom" style="margin: 5px">0</p> - до <p style="margin: 5px" id="priceTo">{{maxPrice}}</p>
 		</div>
 	</div>
 	<div class="options_block" style="margin-bottom: 30px">
 		<multiple-selectium class="multi_selectium" id="patron_color" options="patronColorOptions"
-			values="patronColorValues" placeholder="Цвет" name="patronColor"> </multiple-selectium>
+			placeholder="Цвет" name="patronColor"> </multiple-selectium>
 		<multiple-selectium class="multi_selectium" id="patron_material" options="patronMaterialOptions"
-			values="patronMaterialValues" placeholder="Материал" name="patronMaterial"> </multiple-selectium>
+			placeholder="Материал" name="patronMaterial"> </multiple-selectium>
 		<multiple-selectium class="multi_selectium" id="patron_height" options="patronHeightOptions"
-			values="patronHeightValues" placeholder="Высота" name="patronHeight"> </multiple-selectium>
+			placeholder="Высота" name="patronHeight"> </multiple-selectium>
 	</div>
 	<div class="items" id="items">
-		<div ng-repeat="item in items | orderBy : sort : sortDirection" class="item_block">
-			<div class="item" name="modalItem" modalData={{getModalData($index)}}>
-				<img src="{{item.images}}" width="250px" height="250px">
+		<div ng-repeat="item in items | filter:filterFunction | orderBy : sort : sortDirection" class="item_block">
+			<div class="item" name="modalItem" modalData={{getModalData(item.id)}} ng-click="setModalDataFunc()">
+				<img ng-src="{{item.image}}" width="250px" height="250px">
 				<div>
 					<p>{{item.name}}</p>
 					<p style="font-weight: bold;">{{item.price}}<i class="fas fa-ruble-sign"></i></p>

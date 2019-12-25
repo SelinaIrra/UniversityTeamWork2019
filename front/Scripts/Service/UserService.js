@@ -44,7 +44,6 @@ var UserService = function () {
                 'Authorization': 'Bearer ' + localStorage.getItem('lightToken') 
             },
             async: false, 
-            dataType: 'json',
             error: function (res) { 
                 if (userS.incognito == undefined && res.status == '403')
                     userS.incognito = true;
@@ -58,14 +57,13 @@ var UserService = function () {
 
     function setFavouritedList() {
         $.ajax({
-            url: 'https://lightingstore-server.herokuapp.com/favourites',
+            url: 'https://lightingstore-server.herokuapp.com/favourite',
             type: "GET",
             async: false, 
             headers: {
                 "Content-Type": "application/json",
                 'Authorization': 'Bearer ' + localStorage.getItem('lightToken') 
             },
-            dataType: 'json',
             error: function (res) {
                 if (userS.incognito == undefined && res.status == '403')
                     userS.incognito = true;

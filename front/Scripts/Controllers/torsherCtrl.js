@@ -1,30 +1,29 @@
-var torsherCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope) {
+var torsherCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope, ItemsService) {
     var vm = this;   
+    ItemsService.getCategories();
+    $scope.items = ItemsService.getProducts('torsher');
 
+    $scope.maxPrice = Math.max.apply(null, $scope.items.map(x => x.price));
+    
     $scope.multipleSelectiumComponent = {
-        torsherColorOptions: ["черный", "белый", "серый", "коричневый", "желтый", "прозрачный"],
-        torsherColorValues: ['black', 'white', 'grey', 'brown', 'yellow', 'transparent'],
-        torsherMaterialOptions: ['хрусталь', 'мрамор', 'камень', 'пластик', 'стекло', 'металл', 'ткань', 'дерево'],
-        torsherMaterialValues: ['crystal', 'marble', 'stone', 'plast', 'glass', 'metal', 'fabric', 'wood'],
-        torsherHeightOptions: ['от 40 см','от 90 см', 'от 130 см', 'от 170 см'],
-        torsherHeightValues: ['40','90', '130', '170'],
-        torsherWidthOptions: ['от 30 см','от 60 см', 'от 90 см', 'от 110см'],
-        torsherWidthValues: ['30','60', '90', '110'],
-        torsherLampOptions: ['от 2', 'от 4', 'от 7'],
-        torsherLampValues: ['2', '4', '7']
+        torsherColorOptions: ItemsService.getProperties('torsher', 'color'),
+        torsherMaterialOptions: ItemsService.getProperties('torsher', 'material'),
+        torsherHeightOptions: ItemsService.getProperties('torsher', 'height'),
+        torsherWidthOptions: ItemsService.getProperties('torsher', 'width'),
+        torsherLampOptions: ItemsService.getProperties('torsher', 'lampCount')
     };
 
     $scope.selectiumComponent = {
-    torsherSortOptions: ["по возрастанию цены", "по убыванию цены"],
-    torsherSortValues: ['up', 'down'],
-    torsherSortDefault: 'Сортировка'
+        torsherSortOptions: ["по возрастанию цены", "по убыванию цены"],
+        torsherSortValues: ['up', 'down'],
+        torsherSortDefault: 'Сортировка'
     }
 
     $("#torsherPrice").slider({
         range: true,
         min: 0,
-        max: 30000,
-        values: [ 0, 30000 ],
+        max: $scope.maxPrice,
+        values: [ 0, $scope.maxPrice ],
         step: 100,
         slide: function( event, ui ) {
           $( "#priceFrom" )[0].innerText = ui.values[0];
@@ -39,169 +38,63 @@ var torsherCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope) {
             event.stopPropagation();
         });
 
-    })
+        $('#torsher_color')[0].addEventListener("changeMultiSelectiumOptions", function (event) {
+            setFilters();            
+            event.stopPropagation();
+        });
 
-    $scope.getModalData = function(index) {
-        return {
-            type: 'lamp',
-            id: $scope.items[index].id,
-            name: $scope.items[index].name,
-            images: $scope.items[index].images,
-            price: $scope.items[index].price,
-            width: $scope.items[index].width,
-            height: $scope.items[index].height,
-            material: $scope.items[index].material,
-            color: $scope.items[index].color,
-            lamps: $scope.items[index].lamps
+        $('#torsher_material')[0].addEventListener("changeMultiSelectiumOptions", function (event) {
+            setFilters();            
+            event.stopPropagation();
+        });
+
+        $('#torsher_width')[0].addEventListener("changeMultiSelectiumOptions", function (event) {
+            setFilters();            
+            event.stopPropagation();
+        });
+
+        $('#torsher_height')[0].addEventListener("changeMultiSelectiumOptions", function (event) {
+            setFilters();            
+            event.stopPropagation();
+        });
+
+        $('#torsher_lamps')[0].addEventListener("changeMultiSelectiumOptions", function (event) {
+            setFilters();            
+            event.stopPropagation();
+        });
+    })
+    
+    function setFilters() {
+        let colorArr = $('#torsher_color').val().split(',');
+        let lampsArr = $('#torsher_lamps').val().split(',');
+        let heightArr = $('#torsher_height').val().split(',');
+        let widthArr = $('#torsher_width').val().split(',');
+        let materialArr = $('#torsher_material').val().split(',');
+
+        $scope.filterFunction = function (value) {
+            return ((Number(value.price) >= Number($( "#priceFrom" )[0].innerText) && Number(value.price) <= Number($( "#priceTo" )[0].innerText))
+                && ((widthArr.length == 1 && widthArr[0]== "") || widthArr.filter(x => {return Number(x) == Number(value.width)}).length > 0)
+                && ((heightArr.length == 1 && heightArr[0]== "") || heightArr.filter(x => {return Number(x) == Number(value.height)}).length > 0)
+                && ((materialArr.length == 1 && materialArr[0]== "") || materialArr.indexOf(value.material) > -1)
+                && ((colorArr.length == 1 && colorArr[0]== "") || colorArr.indexOf(value.color) > -1)
+                && ((lampsArr.length == 1 && lampsArr[0]== "") || lampsArr.filter(x => {return Number(x) == Number(value.lamps)}).length > 0))
         }
     }
 
-    $scope.items = [
-      {
-          id: 643,
-          name: 'model 643',
-          descriptions: "",
-          images: 'Content/items/torsher/1.jpg',
-          lamps: 1,
-          price: 2300,
-          color:'transparent',
-          width: 30,
-          height: 50,
-          material: 'metal'
-      },
-      {
-          id: 635,
-          name: 'model 635',
-          descriptions: "",
-          images: 'Content/items/torsher/2.jpg',
-          lamps: 1,
-          price: 3700,
-          color:'yellow',
-          width:51,
-          height:55,
-          material: 'crystal'
-      },
-      {
-          id: 6223,
-          name: 'model 6223',
-          descriptions: "",
-          images: 'Content/items/torsher/3.jpg',
-          lamps: 3,
-          price: 7000,
-          color:'grey',
-          width:56,
-          height:77,
-          material: 'wood',
-      },
-      {
-          id: 6043,
-          name: 'model 6043',
-          descriptions: "",
-          images: 'Content/items/torsher/4.jpg',
-          lamps: 2,
-          price: 2200,
-          color:'grey',
-          width:89,
-          height:67,
-          material:'metal'
-      },
-      {
-          id: 637,
-          name: 'model 637',
-          descriptions: "",
-          images: 'Content/items/torsher/5.jpg',
-          lamps: 2,
-          price: 6140,
-          color:'yellow',
-          width:56,
-          height:94,
-          material: 'glass'
-      },
-      {
-          id: 686,
-          name: 'model 686',
-          descriptions: "",
-          images: 'Content/items/torsher/6.jpg',
-          lamps: 2,
-          price: 8800,
-          color:'black',
-          width:44,
-          height:77,
-          material: 'glass'
-      },
-      {
-          id: 677,
-          name: 'model 677',
-          descriptions: "",
-          images: 'Content/items/torsher/7.jpg',
-          lamps: 3,
-          price: 9000,
-          color:'black',
-          width:55,
-          height:100,
-          material: 'glass'
-      },
-      {
-          id: 632,
-          name: 'model 632',
-          descriptions: "",
-          images: 'Content/items/torsher/8.jpg',
-          lamps: 2,
-          price: 10200,
-          color:'grey',
-          width:40,
-          height:70,
-          material: 'metal'
-      },
-      {
-          id: 656,
-          name: 'model 656',
-          descriptions: "",
-          images: 'Content/items/torsher/9.jpg',
-          lamps: 2,
-          price: 12800,
-          color:'white',
-          width:44,
-          height:80,
-          material: 'metal'
-      },
-      {
-          id: 603,
-          name: 'model 603',
-          descriptions: "",
-          images: 'Content/items/torsher/10.jpg',
-          lamps: 2,
-          price: 7300,
-          color:'black',
-          width: 55,
-          height: 100,
-          material: 'glass'
-      },
-      {
-          id: 648,
-          name: 'model 648',
-          descriptions: "",
-          images: 'Content/items/torsher/11.jpg',
-          lamps: 3,
-          price: 22300,
-          color:'white',
-          width: 34,
-          height: 44,
-          material: 'metal'
-      },
-      {
-          id: 689,
-          name: 'model 689',
-          descriptions: "",
-          images: 'Content/items/torsher/12.jpg',
-          lamps: 2,
-          price: 9400,
-          color: 'white',
-          width: 20,
-          height: 50,
-          material: 'crystal'
-      }
-  ]
+    $scope.getModalData = () => {}
+
+    $scope.setModalDataFunc = function() {
+        $scope.getModalData = function(id) {
+            return {
+                item: $scope.items.filter(x => x.id == id)[0],
+                type: 'torsher'
+            }
+        }
+    }
+
+    $scope.$on('clearModalData', function() {
+        $scope.getModalData = () => {}
+    })
 }
 
-torsherCtrl.$inject = ['$scope', '$sce', '$timeout', '$http', '$modal', '$rootScope'];
+torsherCtrl.$inject = ['$scope', '$sce', '$timeout', '$http', '$modal', '$rootScope', 'ItemsService'];

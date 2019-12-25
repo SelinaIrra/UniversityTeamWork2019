@@ -1,6 +1,5 @@
 var userCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope, UserService, FavourActionService) {
     var vm = this;
-    $scope.selectedItems = UserService.favourList;
 
     $scope.admin = UserService.userInfo.roles.filter(function(x){return x.name == 'ADMIN'}).length;
 
@@ -11,9 +10,12 @@ var userCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope, User
     $('#user_email').val($scope.user.email);
 
     UserService.setFavouritedList();
+    $scope.selectedItems = UserService.favourList;
 
     $scope.deleteItemFromFavour = function(id) {
-        FavourActionService.deleteItem(id);
+        FavourActionService.deleteItem(id, ()=>{
+            $scope.selectedItems = $scope.selectedItems.filter(x => x.id != id)
+        });
     }
 
 }

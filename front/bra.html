@@ -8,26 +8,26 @@
 		<p>Диапазон цен:</p>
 		<div id="braPrice" style="width: 200px"></div>
 		<div id="braPriceBlock" class="price_range">
-			от <p id="priceFrom" style="margin: 5px">0</p> - до <p style="margin: 5px" id="priceTo">20000</p>
+			от <p id="priceFrom" style="margin: 5px">0</p> - до <p style="margin: 5px" id="priceTo">{{maxPrice}}</p>
 		</div>
 	</div>
 	<div class="options_block" style="margin-bottom: 30px">
-		<multiple-selectium class="multi_selectium" id="bra_color" options="braColorOptions" values="braColorValues"
+		<multiple-selectium class="multi_selectium" id="bra_color" options="braColorOptions"
 			placeholder="Цвет" name="braColor"> </multiple-selectium>
 		<multiple-selectium class="multi_selectium" id="bra_material" options="braMaterialOptions"
-			values="braMaterialValues" placeholder="Материал" name="braMaterial"> </multiple-selectium>
-		<multiple-selectium class="multi_selectium" id="bra_height" options="braHeightOptions" values="braHeightValues"
+			placeholder="Материал" name="braMaterial"> </multiple-selectium>
+		<multiple-selectium class="multi_selectium" id="bra_height" options="braHeightOptions"
 			placeholder="Высота" name="braHeight"> </multiple-selectium>
-		<multiple-selectium class="multi_selectium" id="bra_width" options="braWidthOptions" values="braWidthValues"
+		<multiple-selectium class="multi_selectium" id="bra_width" options="braWidthOptions"
 			placeholder="Ширина" name="braWidth"> </multiple-selectium>
-		<multiple-selectium class="multi_selectium" id="bra_lamps" options="braLampOptions" values="braLampValues"
+		<multiple-selectium class="multi_selectium" id="bra_lamps" options="braLampOptions"
 			placeholder="Количество ламп" name="braLamps"> </multiple-selectium>
 	</div>
 	
 	<div class="items" id="items">
 		<div ng-repeat="item in items | filter:filterFunction | orderBy : sort : sortDirection" class="item_block">
-			<div class="item" name="modalItem" modalData={{getModalData($index)}}>
-				<img src="{{item.images}}" width="250px" height="250px">
+			<div class="item" name="modalItem" modalData={{getModalData(item.id)}} ng-click="setModalDataFunc()">
+				<img ng-src="{{item.image}}" width="250px" height="250px">
 				<div>
 					<p>{{item.name}}</p>
 					<p style="font-weight: bold;">{{item.price}}<i class="fas fa-ruble-sign"></i></p>

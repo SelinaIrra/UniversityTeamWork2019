@@ -1,14 +1,15 @@
-var patronCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope) {
+var patronCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope, ItemsService) {
   var vm = this;
-
+  ItemsService.getCategories();
+  $scope.items = ItemsService.getProducts('patron');
+  
+  $scope.maxPrice = Math.max.apply(null, $scope.items.map(x => x.price));
+  
   $scope.multipleSelectiumComponent = {
-    patronColorOptions: ["серый", "красный", "коричневый", "желтый"],
-    patronColorValues: ['grey', 'red', 'brown', 'yellow'],
-    patronMaterialOptions: ['металл'],
-    patronMaterialValues: ['metal'],
-    patronHeightOptions: ['от 6 см', 'от 8 см'],
-    patronHeightValues: ['6', '8']
-  };
+    patronColorOptions: ItemsService.getProperties('patron', 'color'),
+    patronMaterialOptions: ItemsService.getProperties('patron', 'material'),
+    patronHeightOptions: ItemsService.getProperties('patron', 'height')
+};
 
   $scope.selectiumComponent = {
     patronSortOptions: ["по возрастанию цены", "по убыванию цены"],
@@ -22,13 +23,40 @@ var patronCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope) {
         $scope.sortDirection = event.detail.data.value == 'down' ? true : false
         event.stopPropagation();
     });
-})
+    $('#patron_color')[0].addEventListener("changeMultiSelectiumOptions", function (event) {
+      setFilters();            
+      event.stopPropagation();
+    });
+
+    $('#patron_material')[0].addEventListener("changeMultiSelectiumOptions", function (event) {
+        setFilters();            
+        event.stopPropagation();
+    });
+
+    $('#patron_height')[0].addEventListener("changeMultiSelectiumOptions", function (event) {
+        setFilters();            
+        event.stopPropagation();
+    });
+  })
+
+function setFilters() {
+  let colorArr = $('#patron_color').val().split(',');
+  let heightArr = $('#patron_height').val().split(',');
+  let materialArr = $('#patron_material').val().split(',');
+
+  $scope.filterFunction = function (value) {
+      return ((Number(value.price) >= Number($( "#priceFrom" )[0].innerText) && Number(value.price) <= Number($( "#priceTo" )[0].innerText))
+          && ((heightArr.length == 1 && heightArr[0]== "") || heightArr.filter(x => {return Number(x) == Number(value.height)}).length > 0)
+          && ((materialArr.length == 1 && materialArr[0]== "") || materialArr.indexOf(value.material) > -1)
+          && ((colorArr.length == 1 && colorArr[0]== "") || colorArr.indexOf(value.color) > -1))
+  }
+}
 
   $("#patronPrice").slider({
     range: true,
     min: 0,
-    max: 1000,
-    values: [0, 1000],
+    max: $scope.maxPrice,
+    values: [0, $scope.maxPrice],
     step: 100,
     slide: function (event, ui) {
       $("#priceFrom")[0].innerText = ui.values[0];
@@ -36,142 +64,21 @@ var patronCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope) {
     }
   });
 
-  $scope.getModalData = function(index) {
-    return {
-        type: 'lamp',
-        id: $scope.items[index].id,
-        name: $scope.items[index].name,
-        images: $scope.items[index].images,
-        price: $scope.items[index].price,
-        height: $scope.items[index].height,
-        material: $scope.items[index].material,
-        color: $scope.items[index].color,
-    }
+  $scope.getModalData = () => {}
+
+  $scope.setModalDataFunc = function() {
+      $scope.getModalData = function(id) {
+          return {
+              item: $scope.items.filter(x => x.id == id)[0],
+              type: 'patron'
+          }
+      }
+  }
+
+  $scope.$on('clearModalData', function() {
+      $scope.getModalData = () => {}
+  })
+
 }
 
-
-  $scope.items = [
-    {
-      id: 443,
-      name: 'model 443',
-      descriptions: "",
-      images: 'Content/items/patron/1.jpg',
-      lamps: 1,
-      price: 2300,
-      color: 'transparent',
-      width: 30,
-      height: 50,
-      material: 'metal'
-    },
-    {
-      id: 435,
-      name: 'model 435',
-      descriptions: "",
-      images: 'Content/items/patron/2.jpg',
-      lamps: 1,
-      price: 3700,
-      color: 'yellow',
-      width: 51,
-      height: 55,
-      material: 'crystal'
-    },
-    {
-      id: 4223,
-      name: 'model 4223',
-      descriptions: "",
-      images: 'Content/items/patron/3.jpg',
-      lamps: 3,
-      price: 7000,
-      color: 'grey',
-      width: 56,
-      height: 77,
-      material: 'wood',
-    },
-    {
-      id: 4043,
-      name: 'model 4043',
-      descriptions: "",
-      images: 'Content/items/patron/4.jpg',
-      lamps: 2,
-      price: 2200,
-      color: 'grey',
-      width: 89,
-      height: 67,
-      material: 'metal'
-    },
-    {
-      id: 437,
-      name: 'model 437',
-      descriptions: "",
-      images: 'Content/items/patron/5.jpg',
-      lamps: 2,
-      price: 6140,
-      color: 'yellow',
-      width: 56,
-      height: 94,
-      material: 'glass'
-    },
-    {
-      id: 486,
-      name: 'model 486',
-      descriptions: "",
-      images: 'Content/items/patron/6.jpg',
-      lamps: 2,
-      price: 8800,
-      color: 'black',
-      width: 44,
-      height: 77,
-      material: 'glass'
-    },
-    {
-      id: 477,
-      name: 'model 477',
-      descriptions: "",
-      images: 'Content/items/patron/7.jpg',
-      lamps: 3,
-      price: 9000,
-      color: 'black',
-      width: 40,
-      height: 70,
-      material: 'glass'
-    },
-    {
-      id: 432,
-      name: 'model 432',
-      descriptions: "",
-      images: 'Content/items/patron/8.jpg',
-      lamps: 2,
-      price: 10200,
-      color: 'grey',
-      width: 40,
-      height: 70,
-      material: 'metal'
-    },
-    {
-      id: 456,
-      name: 'model 456',
-      descriptions: "",
-      images: 'Content/items/patron/9.jpg',
-      lamps: 2,
-      price: 12800,
-      color: 'white',
-      width: 44,
-      height: 80,
-      material: 'metal'
-    },
-    {
-      id: 403,
-      name: 'model 403',
-      descriptions: "",
-      images: 'Content/items/patron/10.jpg',
-      lamps: 2,
-      price: 7300,
-      color: 'black',
-      width: 55,
-      height: 100,
-      material: 'glass'
-    }
-  ]
-}
-
-patronCtrl.$inject = ['$scope', '$sce', '$timeout', '$http', '$modal', '$rootScope'];
+patronCtrl.$inject = ['$scope', '$sce', '$timeout', '$http', '$modal', '$rootScope', 'ItemsService'];

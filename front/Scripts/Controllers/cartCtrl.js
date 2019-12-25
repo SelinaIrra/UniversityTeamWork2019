@@ -10,6 +10,7 @@ var cartCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope, User
                 return sum + current.price
             }, 0);
     }
+    cartAmount();
 
     
     $scope.deleteItem = function(id){
@@ -28,15 +29,14 @@ var cartCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope, User
                 "Content-Type": "application/json",
                 'Authorization': 'Bearer ' + localStorage.getItem('lightToken') 
             },
-            dataType: 'json',
-            data: JSON.stringify([$scope.items.map(x => x.id)]),
+            data: JSON.stringify($scope.items.map(x => x.id)),
             error: function (res) { 
                 alert('Ошибка(');
             },
             success: function (res) {
                 alert('Ваш заказ оформлен. Ждите.. чуда)');
-                let url = document.location.href.split("#")
-                document.location.href = url;
+                $scope.items = [];
+                cartAmount();
             }
         });
     }
