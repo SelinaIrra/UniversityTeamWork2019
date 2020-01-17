@@ -35,6 +35,16 @@ const customDataProvider = {
     ...dataProvider
 }
 
+customDataProvider.getList = async function (url, b) {
+    if (url === "orders")
+        url = "orders/all";
+    let items = await fetchJson(`${apiUrl}/${url}`);
+    return {
+        'data': items.json,
+        'total': items.json.length
+    };
+}
+
 customDataProvider.getOne = async function (a, b) {
     b.pagination = {};
     b.sort = {};
@@ -49,20 +59,6 @@ customDataProvider.getOne = async function (a, b) {
 
 customDataProvider.create = async function (resource, params) {
     if (params.data.image && params.data.image.image) {
-        // let image = await fetch(params.data.image.image);
-        // let formData = new FormData();
-        // formData.append('image', await image.blob(), 'a.jpg')
-        // let resp = await fetch(`${apiUrl}/images`, {
-        //     method: 'POST',
-        //     headers: {
-        //         contentType: 'multipart/form-data',
-        //         authorization: `Bearer ${localStorage.getItem('admin_token')}`
-        //     },
-        //     body: formData,
-        // });
-        // let url = await resp.text();
-        // console.log(url);
-        // params.data.images = [url];
 
         let image = await fetch(params.data.image.image);
         let formData = new FormData();

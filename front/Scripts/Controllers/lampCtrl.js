@@ -1,4 +1,4 @@
-var lampCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope, ItemsService) {
+var lampCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope, ItemsService, CartActionService) {
     var vm = this;
     
     ItemsService.getCategories();
@@ -65,13 +65,17 @@ var lampCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope, Item
         $scope.getModalData = () => {}
     })
 
+    $scope.addToCart = function(id, event) {
+        CartActionService.addItem(id, ()=>{alert('Товар добавлен в корзину')});
+        event.stopPropagation();
+    }
 
     $("#lampPrice").slider({
         range: true,
         min: 0,
         max: $scope.maxPrice,
         values: [0, $scope.maxPrice],
-        step: 100,
+        step: 10,
         slide: function (event, ui) {
             $("#priceFrom")[0].innerText = ui.values[0];
             $("#priceTo")[0].innerText = ui.values[1];
@@ -80,4 +84,4 @@ var lampCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope, Item
 
 }
 
-lampCtrl.$inject = ['$scope', '$sce', '$timeout', '$http', '$modal', '$rootScope', 'ItemsService'];
+lampCtrl.$inject = ['$scope', '$sce', '$timeout', '$http', '$modal', '$rootScope', 'ItemsService', 'CartActionService'];

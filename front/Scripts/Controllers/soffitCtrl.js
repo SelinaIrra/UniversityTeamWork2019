@@ -1,4 +1,4 @@
-var soffitCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope, ItemsService) {
+var soffitCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope, ItemsService, CartActionService) {
     var vm = this;   
     ItemsService.getCategories();
     $scope.items = ItemsService.getProducts('soffit');
@@ -81,6 +81,11 @@ var soffitCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope, It
         }
     }
 
+    $scope.addToCart = function(id, event) {
+        CartActionService.addItem(id, ()=>{alert('Товар добавлен в корзину')});
+        event.stopPropagation();
+    }
+
     $scope.getModalData = () => {}
 
     $scope.setModalDataFunc = function() {
@@ -98,4 +103,4 @@ var soffitCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope, It
 
 }
 
-soffitCtrl.$inject = ['$scope', '$sce', '$timeout', '$http', '$modal', '$rootScope', 'ItemsService'];
+soffitCtrl.$inject = ['$scope', '$sce', '$timeout', '$http', '$modal', '$rootScope', 'ItemsService', 'CartActionService'];

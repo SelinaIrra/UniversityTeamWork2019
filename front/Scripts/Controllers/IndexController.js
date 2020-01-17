@@ -14,7 +14,6 @@ var IndexController = function ($scope, $sce, $timeout, $http, $modal, $rootScop
     ];
 
     $scope.$on('sentModalData', function (event, data) {
-        vm.itemInCart = false;
         vm.itemInFavour = false;
 
         vm.itemsSrc = JSON.parse(data).item.image;
@@ -31,14 +30,18 @@ var IndexController = function ($scope, $sce, $timeout, $http, $modal, $rootScop
         $scope.$apply();
     });
 
+    vm.fromFavour = function() {
+        FavourActionService.deleteItem(vm.selectedItemId, ()=>{})
+        vm.itemInFavour = false;
+    }
+
     vm.addToFavour = function() {
-        FavourActionService.addItem(vm.selectedItemId, ()=>{alert('Товар добавлен в избранное')})
+        FavourActionService.addItem(vm.selectedItemId, ()=>{})
         vm.itemInFavour = true;
     }
 
     vm.addToCart = function() {
         CartActionService.addItem(vm.selectedItemId, ()=>{alert('Товар добавлен в корзину')})
-        vm.itemInCart = true;
     }
 
     $scope.$on('closingModal', function () {
@@ -63,13 +66,31 @@ var IndexController = function ($scope, $sce, $timeout, $http, $modal, $rootScop
 
     UserService.setUserInfo();
 
+
+    function check(elem, emailFlag) {
+        let reg;
+        if (emailFlag)
+            reg = new RegExp(/^([a-z0-9!#$%&*+\/=?^_`{|}~"-]+(\.["a-z0-9!#$%&*+\/=?^_`{|}~-]+)*)@([а-яёa-z]+)\.([а-яёa-z]+)$/gmi);
+        else reg = new RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]{9,50}$/gm);
+        return reg.test(elem.val().trim())
+    }
+
+
     $scope.auth = function(enter) {
         let data;
         if (enter) {
             data = JSON.stringify({ login: $('#loginIn').val(), password: $('#passIn').val() })
         } else {
             if ($('#auth_pass').val() != $('#auth_pass1').val()) {
-                alert('пароли не совпадают');
+                alert('Пароли не совпадают');
+                return;
+            }
+            if (!check($('#auth_pass'))) {
+                alert('Неправильно задан пароль: длина от 9 до 50 символов, обязательны буква верхнего, нижнего регистра и цифра');
+                return;
+            }
+            if (!check($('#auth_email'), true)) {
+                alert('Введен некорректный email');
                 return;
             }
             if ($('#auth_pass').val() != '' && $('#auth_login').val() != ''  && $('#auth_name').val() != ''  && $('#auth_email').val() != '' ) {

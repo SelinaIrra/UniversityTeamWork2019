@@ -1,4 +1,4 @@
-var torsherCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope, ItemsService) {
+var torsherCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope, ItemsService, CartActionService) {
     var vm = this;   
     ItemsService.getCategories();
     $scope.items = ItemsService.getProducts('torsher');
@@ -30,6 +30,11 @@ var torsherCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope, I
           $( "#priceTo" )[0].innerText = ui.values[1];
         }
     });
+
+    $scope.addToCart = function(id, event) {
+        CartActionService.addItem(id, ()=>{alert('Товар добавлен в корзину')});
+        event.stopPropagation();
+    }
 
     $(document).ready(function () {
         $('#torsher_sort')[0].addEventListener("changeSelectiumOption", function (event) {
@@ -97,4 +102,4 @@ var torsherCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope, I
     })
 }
 
-torsherCtrl.$inject = ['$scope', '$sce', '$timeout', '$http', '$modal', '$rootScope', 'ItemsService'];
+torsherCtrl.$inject = ['$scope', '$sce', '$timeout', '$http', '$modal', '$rootScope', 'ItemsService', 'CartActionService'];

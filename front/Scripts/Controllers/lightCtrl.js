@@ -1,4 +1,4 @@
-var lightCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope, ItemsService) {
+var lightCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope, ItemsService, CartActionService) {
     var vm = this;  
     ItemsService.getCategories();
     $scope.items = ItemsService.getProducts('light');
@@ -51,6 +51,11 @@ var lightCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope, Ite
             event.stopPropagation();
         });
     })
+
+    $scope.addToCart = function(id, event) {
+        CartActionService.addItem(id, ()=>{alert('Товар добавлен в корзину')});
+        event.stopPropagation();
+    }
         
     function setFilters() {
         let colorArr = $('#light_color').val().split(',');
@@ -98,4 +103,4 @@ var lightCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope, Ite
 
 }
 
-lightCtrl.$inject = ['$scope', '$sce', '$timeout', '$http', '$modal', '$rootScope', 'ItemsService'];
+lightCtrl.$inject = ['$scope', '$sce', '$timeout', '$http', '$modal', '$rootScope', 'ItemsService', 'CartActionService'];

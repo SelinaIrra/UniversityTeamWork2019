@@ -129,3 +129,15 @@ header .block span { font-size: 16px; text-align: end;}
 .user_inf input { margin-bottom: 14px}
 
 .active_radio { background-color: #ebebee }
+
+.no_hover tr:hover { background-color: transparent !important }
+
+.cart_style {
+  position: absolute;
+  color: black;
+  font-size: 16px;
+  background-color: rgba(80,80,80, 0.3);
+  padding: 5px;
+  margin-left: auto;
+  border: 1px solid #ebebee;
+}

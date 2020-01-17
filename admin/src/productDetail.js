@@ -11,7 +11,6 @@ const PostEditToolbar = props => (
 export const ProductCreate = (props) => (
     <Create {...props}>
         <SimpleForm redirect="list">
-            <TextInput source="id" />
             <TextInput source="categoryId" validate={required()} />
             <TextInput source="name" validate={required()} />
             <TextInput source="description" validate={required()} />

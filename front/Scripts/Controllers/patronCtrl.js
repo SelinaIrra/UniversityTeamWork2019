@@ -1,4 +1,4 @@
-var patronCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope, ItemsService) {
+var patronCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope, ItemsService, CartActionService) {
   var vm = this;
   ItemsService.getCategories();
   $scope.items = ItemsService.getProducts('patron');
@@ -39,6 +39,11 @@ var patronCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope, It
     });
   })
 
+$scope.addToCart = function(id, event) {
+    CartActionService.addItem(id, ()=>{alert('Товар добавлен в корзину')});
+    event.stopPropagation();
+}
+
 function setFilters() {
   let colorArr = $('#patron_color').val().split(',');
   let heightArr = $('#patron_height').val().split(',');
@@ -57,7 +62,7 @@ function setFilters() {
     min: 0,
     max: $scope.maxPrice,
     values: [0, $scope.maxPrice],
-    step: 100,
+    step: 10,
     slide: function (event, ui) {
       $("#priceFrom")[0].innerText = ui.values[0];
       $("#priceTo")[0].innerText = ui.values[1];
@@ -81,4 +86,4 @@ function setFilters() {
 
 }
 
-patronCtrl.$inject = ['$scope', '$sce', '$timeout', '$http', '$modal', '$rootScope', 'ItemsService'];
+patronCtrl.$inject = ['$scope', '$sce', '$timeout', '$http', '$modal', '$rootScope', 'ItemsService', 'CartActionService'];

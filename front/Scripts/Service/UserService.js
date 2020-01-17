@@ -1,4 +1,4 @@
-let userInfo, cartList, favourList, incognito;
+let userInfo, cartList, favourList, ordersList, incognito;
 var UserService = function () {
     var userS = {
         userInfo: userInfo,
@@ -7,7 +7,9 @@ var UserService = function () {
         favourList: favourList,
         setCartList: setCartList,
         setFavouritedList: setFavouritedList,
-        incognito: incognito
+        incognito: incognito, 
+        ordersList: ordersList, 
+        setOrdersList: setOrdersList
     };
 
     return userS;
@@ -51,6 +53,26 @@ var UserService = function () {
             success: function (res) {
                 userS.incognito = undefined;
                 userS.cartList = res;
+            }
+        });
+    }
+
+    function setOrdersList() {
+        $.ajax({
+            url: 'https://lightingstore-server.herokuapp.com/orders',
+            type: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                'Authorization': 'Bearer ' + localStorage.getItem('lightToken') 
+            },
+            async: false, 
+            error: function (res) { 
+                if (userS.incognito == undefined && res.status == '403')
+                    userS.incognito = true;
+            },
+            success: function (res) {
+                userS.incognito = undefined;
+                userS.ordersList = res;
             }
         });
     }

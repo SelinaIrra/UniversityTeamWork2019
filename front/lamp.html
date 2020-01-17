@@ -20,6 +20,7 @@
 	<div class="items" id="items"> 
 		<div ng-repeat="item in items | filter:filterFunction | orderBy : sort : sortDirection" class="item_block">
 			<div class="item" name="modalItem" modalData={{getModalData(item.id)}} ng-click="setModalDataFunc()">
+				<span ng-click="addToCart(item.id, $event)" class="cart_style"><i class="fas fa-cart-plus"></i></span>
 				<img ng-src="{{item.image}}" width="250px" height="250px">
 				<div>
 					<p>{{item.name}}</p>

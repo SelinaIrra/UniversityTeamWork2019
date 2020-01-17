@@ -1,6 +1,6 @@
 <div>
 	<h3>Личный кабинет</h3>
-	<div style="display: flex; justify-content: center; margin-top: 20px">
+	<div style="display: flex; flex-direction: column; justify-content: center; margin-top: 20px;">
 		<div class="user_inf">
 			<div>
 				<input title="Имя" readonly type="text" id="user_name">
@@ -19,6 +19,57 @@
 						<td>{{item.name}}</td>
 						<td><img ng-src="{{item.image}}" width="100px" height="100px"></td>
 						<td><span class="icon" ng-click="deleteItemFromFavour(item.id)" title="Удалить из избранного"><i class="fas fa-times"></i></span></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div>
+			<h4>Заказы</h4>
+			<table class="cart_items no_hover" style="width: 800px">
+				<thead>
+					<tr>
+						<th>Статус</th>
+						<!-- <th>
+							<table class="cart_items">
+								<thead>
+									<tr> -->
+										<th colspan="2">Товар</th>
+										<th>Количество</th>
+										<th>Цена</th>
+									<!-- </tr>
+								</thead>
+							</table>
+						</th> -->
+						<th>Отменить</th>
+					</tr>
+				</thead>
+				<!-- <tbody> -->
+				<tbody ng-repeat="order in orders" id="order_{{$index}}" style="border-bottom: 1px solid #ebebee">
+					<tr ng-show="order.products.length == 0">
+						<td>{{ order.status }}</td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td><span class="icon" ng-click="cancelOrder(order.id)" ng-show="order.status == 'CREATED'" title="Отменить заказ"><i class="fas fa-times"></i></span></td>
+					</tr>
+					<tr ng-repeat="x in order.products" id="x_{{$index}}_{{$parent.$index}}">
+					<!-- <tr ng-repeat="order in orders" id="order_{{$index}}" style="border-bottom: 1px solid #ebebee"> -->
+						<td>{{ $first ? order.status : ""}}</td>
+						<!-- <td> -->
+							<!-- <table class="cart_items" style="width: 500px">
+								<tbody>
+									<tr ng-repeat="x in order.products" id="x_{{$index}}_{{$parent.$index}}"> -->
+										<td>{{x.name}}</td>
+										<td><img ng-src="{{x.image}}" width="100px" height="100px"></td>
+										<td>{{x.orderCount}}</td>
+										<td>{{x.orderCount * x.price}}</td>
+									<!-- </tr>
+								</tbody>
+							</table> -->
+						<!-- </td> -->
+						<td ng-show="$first"><span class="icon" ng-click="cancelOrder(order.id)" ng-show="order.status == 'CREATED'" title="Отменить заказ"><i class="fas fa-times"></i></span></td>
+						<!-- <td><span class="icon" ng-click="cancelOrder(order.id)" ng-show="order.status == 'CREATED'" title="Отменить заказ"><i class="fas fa-times"></i></span></td> -->
 					</tr>
 				</tbody>
 			</table>

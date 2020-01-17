@@ -84,10 +84,13 @@
 				</div>
 				<p class="title margin_auto">{{c.itemPrice}} <i class="fas fa-ruble-sign"></i></p>
 				<div class="item_btns">
-					<span ng-show="!c.itemInFavour" tyle="margin-right: 10px; color: darkgoldenrod;" ng-click="c.addToFavour()" id="favour_{{c.selectedItemId}}">
+					<span ng-show="!c.itemInFavour" style="margin-right: 10px; color: darkgoldenrod;" ng-click="c.addToFavour()" id="favour_{{c.selectedItemId}}">
 						<i class="far fa-star"></i>
 					</span>
-					<span ng-show="!c.itemInCart" ng-click="c.addToCart()"><i class="fas fa-cart-plus"></i></span></div>
+					<span ng-show="c.itemInFavour" style="margin-right: 10px; color: darkgoldenrod;" ng-click="c.fromFavour()" id="no_favour_{{c.selectedItemId}}">
+						<i class="fas fa-star"></i>
+					</span>
+					<span ng-click="c.addToCart()"><i class="fas fa-cart-plus"></i></span></div>
 			</div>
 		</div>
 	</modal>
@@ -114,8 +117,6 @@
 		<header>
 			<div class="header">
 				<div class="search">
-					<input placeholder="Поиск">
-					<span class="search_icon"><i class="fas fa-search"></i></span>
 				</div>
 				<a href="/index.html"><img src="Content/img/logo.png"></a>
 				<div class="block">

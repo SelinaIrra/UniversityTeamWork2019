@@ -7,18 +7,28 @@ var cartCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope, User
     function cartAmount() {
         if ($scope.items.length) 
             $scope.price = $scope.items.reduce(function(sum, current) {
-                return sum + current.price
+                return sum + (current.price * current.cartCount)
             }, 0);
     }
     cartAmount();
 
     
     $scope.deleteItem = function(id){
-        CartActionService.deleteItem(id, function(){ 
-            $scope.items = $scope.items.filter(function(x){return x.id != id});
+        CartActionService.deleteItem(id, function(){
+            UserService.setCartList();
+            $scope.items = UserService.cartList;
             cartAmount();
             $scope.$apply();
         });
+    }
+
+    $scope.addItem = function(id){
+        CartActionService.addItem(id, function(){
+            UserService.setCartList();
+            $scope.items = UserService.cartList;
+            cartAmount();
+            $scope.$apply();
+        })
     }
 
     $scope.sentOrder = function() {
@@ -29,12 +39,12 @@ var cartCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope, User
                 "Content-Type": "application/json",
                 'Authorization': 'Bearer ' + localStorage.getItem('lightToken') 
             },
-            data: JSON.stringify($scope.items.map(x => x.id)),
+            data: JSON.stringify($scope.items.map(function(x){return {id: x.id, count: x.cartCount}})),
             error: function (res) { 
                 alert('Ошибка(');
             },
             success: function (res) {
-                alert('Ваш заказ оформлен. Ждите.. чуда)');
+                alert('Ваш заказ оформлен, ожидайте подтверждения');
                 $scope.items = [];
                 cartAmount();
             }

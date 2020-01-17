@@ -13,8 +13,8 @@ export const OrderEdit = (props) => (
             <NumberInput source="id" disabled fullWidth={true} />
             <TextInput source="user.email" disabled />
             <ArrayInput source="products" disabled>
-                <SimpleFormIterator>
-                    <TextInput source="id" />
+                <SimpleFormIterator disableAdd disableRemove >
+                    <TextInput source="id" label="Product Id"/>
                 </SimpleFormIterator>
             </ArrayInput>
             <SelectInput source="status" choices={[

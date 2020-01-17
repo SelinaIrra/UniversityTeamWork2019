@@ -1,4 +1,4 @@
-var braCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope, ItemsService) {
+var braCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope, ItemsService, CartActionService) {
     var vm = this; 
 
     $scope.sort;
@@ -13,6 +13,11 @@ var braCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope, Items
         braWidthOptions: ItemsService.getProperties('bra', 'width'),
         braLampOptions: ItemsService.getProperties('bra', 'lampCount')
     };
+
+    $scope.addToCart = function(id, event) {
+        CartActionService.addItem(id, ()=>{alert('Товар добавлен в корзину')});
+        event.stopPropagation();
+    }
 
     $scope.items = ItemsService.getProducts('bra');
 
@@ -105,4 +110,4 @@ var braCtrl = function ($scope, $sce, $timeout, $http, $modal, $rootScope, Items
     })
 
 }
-braCtrl.$inject = ['$scope', '$sce', '$timeout', '$http', '$modal', '$rootScope', 'ItemsService'];
+braCtrl.$inject = ['$scope', '$sce', '$timeout', '$http', '$modal', '$rootScope', 'ItemsService', 'CartActionService'];
